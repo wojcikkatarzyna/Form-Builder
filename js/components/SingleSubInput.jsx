@@ -9,8 +9,18 @@ class SingleSubInput extends React.Component{
         };
     }
 
+    handleAddSubInputClick = (e) => {
+        e.preventDefault();
+        this.setState({
+            subInputList : this.state.subInputList.concat(<SingleSubInput/>),
+        })
+    }
+    
     render(){
-        return    <form>
+        const listOfSubInputs = this.state.subInputList.map( (subInput, index) => {
+            return <div key = {index}> {subInput} </div>;
+        });
+        return    <div className = "form">
                       Condition
                       <select>
                           <option> Equals </option>
@@ -18,6 +28,7 @@ class SingleSubInput extends React.Component{
                           <option> Less than </option>
                       </select>
                       <input/>
+                      <br/>
                       Question
                       <input type="text"/>
                       <br/>
@@ -30,8 +41,10 @@ class SingleSubInput extends React.Component{
                       <br/>
                       <button className = "subInput" onClick={this.handleAddSubInputClick}> Add Sub-Input </button>
                       <button className = "delete" onClick={this.handleDeleteClick}> Delete </button>
-                      {listOfSubInputs}
                       <hr/>
-                  </form>
+                      {listOfSubInputs}
+                  </div>
     }
 }
+
+module.exports = SingleSubInput;

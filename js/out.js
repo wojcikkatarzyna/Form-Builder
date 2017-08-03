@@ -22469,9 +22469,20 @@ var AddInput = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (AddInput.__proto__ || Object.getPrototypeOf(AddInput)).call(this, props));
 
         _this.handleDeleteInput = function (index) {
-            var newInputList = [];
+            var newInputList = _this.state.inputList.filter(function (input) {
+                return input !== index;
+            });
             _this.setState({
                 inputList: newInputList
+            });
+        };
+
+        _this.handleItemDone = function (title) {
+            var newItems = _this.state.items.filter(function (item) {
+                return item !== title;
+            });
+            _this.setState({
+                items: newItems
             });
         };
 
@@ -22490,10 +22501,10 @@ var AddInput = function (_React$Component) {
     _createClass(AddInput, [{
         key: 'render',
         value: function render() {
-            var listOfInputs = this.state.inputList.map(function (input) {
+            var listOfInputs = this.state.inputList.map(function (input, index) {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { key: index },
                     ' ',
                     input,
                     ' '
@@ -22557,8 +22568,8 @@ var SingleInput = function (_React$Component) {
         _this.handleDeleteClick = function (e) {
             e.preventDefault();
             if (typeof _this.props.onDone === 'function') {
-                console.log(event.target);
-                _this.props.onDone(event.target);
+                console.log(e.target);
+                _this.props.onDone(index);
             }
         };
 
@@ -22578,18 +22589,18 @@ var SingleInput = function (_React$Component) {
     _createClass(SingleInput, [{
         key: 'render',
         value: function render() {
-            var listOfSubInputs = this.state.subInputList.map(function (subInput) {
+            var listOfSubInputs = this.state.subInputList.map(function (subInput, index) {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { key: index },
                     ' ',
                     subInput,
                     ' '
                 );
             });
             return _react2.default.createElement(
-                'form',
-                null,
+                'div',
+                { className: 'form' },
                 'Question',
                 _react2.default.createElement('input', { type: 'text' }),
                 _react2.default.createElement('br', null),
@@ -22624,8 +22635,8 @@ var SingleInput = function (_React$Component) {
                     { className: 'delete', onClick: this.handleDeleteClick },
                     ' Delete '
                 ),
-                listOfSubInputs,
-                _react2.default.createElement('hr', null)
+                _react2.default.createElement('hr', null),
+                listOfSubInputs
             );
         }
     }]);
@@ -22668,6 +22679,13 @@ var SingleSubInput = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (SingleSubInput.__proto__ || Object.getPrototypeOf(SingleSubInput)).call(this, props));
 
+        _this.handleAddSubInputClick = function (e) {
+            e.preventDefault();
+            _this.setState({
+                subInputList: _this.state.subInputList.concat(_react2.default.createElement(SingleSubInput, null))
+            });
+        };
+
         _this.state = {
             subInputList: []
         };
@@ -22677,9 +22695,18 @@ var SingleSubInput = function (_React$Component) {
     _createClass(SingleSubInput, [{
         key: 'render',
         value: function render() {
+            var listOfSubInputs = this.state.subInputList.map(function (subInput, index) {
+                return _react2.default.createElement(
+                    'div',
+                    { key: index },
+                    ' ',
+                    subInput,
+                    ' '
+                );
+            });
             return _react2.default.createElement(
-                'form',
-                null,
+                'div',
+                { className: 'form' },
                 'Condition',
                 _react2.default.createElement(
                     'select',
@@ -22701,6 +22728,7 @@ var SingleSubInput = function (_React$Component) {
                     )
                 ),
                 _react2.default.createElement('input', null),
+                _react2.default.createElement('br', null),
                 'Question',
                 _react2.default.createElement('input', { type: 'text' }),
                 _react2.default.createElement('br', null),
@@ -22735,14 +22763,16 @@ var SingleSubInput = function (_React$Component) {
                     { className: 'delete', onClick: this.handleDeleteClick },
                     ' Delete '
                 ),
-                listOfSubInputs,
-                _react2.default.createElement('hr', null)
+                _react2.default.createElement('hr', null),
+                listOfSubInputs
             );
         }
     }]);
 
     return SingleSubInput;
 }(_react2.default.Component);
+
+module.exports = SingleSubInput;
 
 /***/ })
 /******/ ]);

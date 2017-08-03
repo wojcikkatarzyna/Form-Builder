@@ -12,11 +12,22 @@ class AddInput extends React.Component{
     }
 
     handleDeleteInput = (index) => {
-        const newInputList = [];
+        const newInputList = this.state.inputList.filter(input => {
+            return input !== index;
+        });
         this.setState({
             inputList : newInputList
         });
     }
+
+    handleItemDone = (title) => {
+        const newItems = this.state.items.filter(item => {
+            return item !== title;
+        });
+        this.setState({
+            items: newItems
+        });
+    };
 
     handleAddInputClick = () => {
         this.setState({
@@ -25,8 +36,8 @@ class AddInput extends React.Component{
     }
 
     render(){
-        const listOfInputs = this.state.inputList.map( input => {
-            return <div> {input} </div>;
+        const listOfInputs = this.state.inputList.map( (input, index) => {
+            return <div key = {index}> {input} </div>;
         });
         return  <div>
                     {listOfInputs}

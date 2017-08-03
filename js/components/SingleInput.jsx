@@ -14,8 +14,8 @@ class SingleInput extends React.Component{
     handleDeleteClick = (e) => {
         e.preventDefault();
         if ( typeof this.props.onDone === 'function' ){
-            console.log(event.target);
-            this.props.onDone(event.target);
+            console.log(e.target);
+            this.props.onDone(index);
         }
     }
 
@@ -27,10 +27,10 @@ class SingleInput extends React.Component{
     }
 
     render(){
-        const listOfSubInputs = this.state.subInputList.map( subInput => {
-            return <div> {subInput} </div>;
+        const listOfSubInputs = this.state.subInputList.map( (subInput, index) => {
+            return <div key = {index}> {subInput} </div>;
         });
-        return <form>
+        return <div className = "form">
                   Question
                   <input type="text"/>
                   <br/>
@@ -43,9 +43,9 @@ class SingleInput extends React.Component{
                   <br/>
                   <button className = "subInput" onClick={this.handleAddSubInputClick}> Add Sub-Input </button>
                   <button className = "delete" onClick={this.handleDeleteClick}> Delete </button>
-                  {listOfSubInputs}
                   <hr/>
-              </form>
+                  {listOfSubInputs}
+              </div>
     }
 }
 
