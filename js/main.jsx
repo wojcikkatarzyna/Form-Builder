@@ -8,7 +8,21 @@ import ReactDOM from 'react-dom';
 //     hashHistory
 // } from 'react-router';
 
-ReactDOM.render(
-    <App/>,
-    document.querySelector('#app')
-)
+import AddInput from './components/AddInput.jsx';
+
+document.addEventListener('DOMContentLoaded', function(){
+
+    class App extends React.Component{
+        render(){
+            return(
+                <AddInput />
+            );
+        }
+    }
+
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#app')
+    );
+
+});

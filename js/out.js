@@ -9763,6 +9763,8 @@ module.exports = __webpack_require__(18);
 "use strict";
 
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(82);
 
 var _react2 = _interopRequireDefault(_react);
@@ -9771,8 +9773,17 @@ var _reactDom = __webpack_require__(81);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _AddInput = __webpack_require__(184);
+
+var _AddInput2 = _interopRequireDefault(_AddInput);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // import { Router,
 //     Route,
 //     Link,
@@ -9781,7 +9792,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //     hashHistory
 // } from 'react-router';
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('#app'));
+document.addEventListener('DOMContentLoaded', function () {
+    var App = function (_React$Component) {
+        _inherits(App, _React$Component);
+
+        function App() {
+            _classCallCheck(this, App);
+
+            return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        }
+
+        _createClass(App, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(_AddInput2.default, null);
+            }
+        }]);
+
+        return App;
+    }(_react2.default.Component);
+
+    _reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('#app'));
+});
 
 /***/ }),
 /* 84 */
@@ -22398,6 +22430,319 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(81);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _SingleInput = __webpack_require__(185);
+
+var _SingleInput2 = _interopRequireDefault(_SingleInput);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AddInput = function (_React$Component) {
+    _inherits(AddInput, _React$Component);
+
+    function AddInput(props) {
+        _classCallCheck(this, AddInput);
+
+        var _this = _possibleConstructorReturn(this, (AddInput.__proto__ || Object.getPrototypeOf(AddInput)).call(this, props));
+
+        _this.handleDeleteInput = function (index) {
+            var newInputList = [];
+            _this.setState({
+                inputList: newInputList
+            });
+        };
+
+        _this.handleAddInputClick = function () {
+            _this.setState({
+                inputList: _this.state.inputList.concat(_react2.default.createElement(_SingleInput2.default, { onDone: _this.handleDeleteInput }))
+            });
+        };
+
+        _this.state = {
+            inputList: []
+        };
+        return _this;
+    }
+
+    _createClass(AddInput, [{
+        key: 'render',
+        value: function render() {
+            var listOfInputs = this.state.inputList.map(function (input) {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    ' ',
+                    input,
+                    ' '
+                );
+            });
+            return _react2.default.createElement(
+                'div',
+                null,
+                listOfInputs,
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.handleAddInputClick },
+                    ' Add Input '
+                )
+            );
+        }
+    }]);
+
+    return AddInput;
+}(_react2.default.Component);
+
+module.exports = AddInput;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(81);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _SingleSubInput = __webpack_require__(186);
+
+var _SingleSubInput2 = _interopRequireDefault(_SingleSubInput);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SingleInput = function (_React$Component) {
+    _inherits(SingleInput, _React$Component);
+
+    function SingleInput(props) {
+        _classCallCheck(this, SingleInput);
+
+        var _this = _possibleConstructorReturn(this, (SingleInput.__proto__ || Object.getPrototypeOf(SingleInput)).call(this, props));
+
+        _this.handleDeleteClick = function (e) {
+            e.preventDefault();
+            if (typeof _this.props.onDone === 'function') {
+                console.log(event.target);
+                _this.props.onDone(event.target);
+            }
+        };
+
+        _this.handleAddSubInputClick = function (e) {
+            e.preventDefault();
+            _this.setState({
+                subInputList: _this.state.subInputList.concat(_react2.default.createElement(_SingleSubInput2.default, null))
+            });
+        };
+
+        _this.state = {
+            subInputList: []
+        };
+        return _this;
+    }
+
+    _createClass(SingleInput, [{
+        key: 'render',
+        value: function render() {
+            var listOfSubInputs = this.state.subInputList.map(function (subInput) {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    ' ',
+                    subInput,
+                    ' '
+                );
+            });
+            return _react2.default.createElement(
+                'form',
+                null,
+                'Question',
+                _react2.default.createElement('input', { type: 'text' }),
+                _react2.default.createElement('br', null),
+                'Type',
+                _react2.default.createElement(
+                    'select',
+                    null,
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' text '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' number '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' yes / no '
+                    )
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'subInput', onClick: this.handleAddSubInputClick },
+                    ' Add Sub-Input '
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'delete', onClick: this.handleDeleteClick },
+                    ' Delete '
+                ),
+                listOfSubInputs,
+                _react2.default.createElement('hr', null)
+            );
+        }
+    }]);
+
+    return SingleInput;
+}(_react2.default.Component);
+
+module.exports = SingleInput;
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(81);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SingleSubInput = function (_React$Component) {
+    _inherits(SingleSubInput, _React$Component);
+
+    function SingleSubInput(props) {
+        _classCallCheck(this, SingleSubInput);
+
+        var _this = _possibleConstructorReturn(this, (SingleSubInput.__proto__ || Object.getPrototypeOf(SingleSubInput)).call(this, props));
+
+        _this.state = {
+            subInputList: []
+        };
+        return _this;
+    }
+
+    _createClass(SingleSubInput, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'form',
+                null,
+                'Condition',
+                _react2.default.createElement(
+                    'select',
+                    null,
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' Equals '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' Greater than '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' Less than '
+                    )
+                ),
+                _react2.default.createElement('input', null),
+                'Question',
+                _react2.default.createElement('input', { type: 'text' }),
+                _react2.default.createElement('br', null),
+                'Type',
+                _react2.default.createElement(
+                    'select',
+                    null,
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' text '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' number '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' yes / no '
+                    )
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'subInput', onClick: this.handleAddSubInputClick },
+                    ' Add Sub-Input '
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'delete', onClick: this.handleDeleteClick },
+                    ' Delete '
+                ),
+                listOfSubInputs,
+                _react2.default.createElement('hr', null)
+            );
+        }
+    }]);
+
+    return SingleSubInput;
+}(_react2.default.Component);
 
 /***/ })
 /******/ ]);
