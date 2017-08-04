@@ -15,7 +15,7 @@ class SingleInput extends React.Component{
         e.preventDefault();
         if ( typeof this.props.onDone === 'function' ){
             console.log(e.target);
-            this.props.onDone(index);
+            this.props.onDone(this.props.number);
         }
     }
 

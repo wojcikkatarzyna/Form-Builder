@@ -22468,32 +22468,33 @@ var AddInput = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (AddInput.__proto__ || Object.getPrototypeOf(AddInput)).call(this, props));
 
-        _this.handleDeleteInput = function (index) {
-            var newInputList = _this.state.inputList.filter(function (input) {
-                return input !== index;
-            });
+        _this.handleDeleteInput = function (num) {
+            console.log(num);
+
+            var newInputList = [];
+            for (var i = 0; i < _this.state.inputList.length; i++) {
+                console.log('BRFORE IF' + _this.state.inputList[i].props.number);
+                if (_this.state.inputList[i].props.number !== num) {
+                    console.log('IN IF' + _this.state.inputList[i].props.number);
+                    newInputList.push(_this.state.inputList[i]);
+                }
+            }
             _this.setState({
                 inputList: newInputList
             });
         };
 
-        _this.handleItemDone = function (title) {
-            var newItems = _this.state.items.filter(function (item) {
-                return item !== title;
-            });
-            _this.setState({
-                items: newItems
-            });
-        };
-
         _this.handleAddInputClick = function () {
+
             _this.setState({
-                inputList: _this.state.inputList.concat(_react2.default.createElement(_SingleInput2.default, { onDone: _this.handleDeleteInput }))
+                counter: _this.state.counter + 1,
+                inputList: _this.state.inputList.concat(_react2.default.createElement(_SingleInput2.default, { number: _this.state.counter, onDone: _this.handleDeleteInput }))
             });
         };
 
         _this.state = {
-            inputList: []
+            inputList: [],
+            counter: 0
         };
         return _this;
     }
@@ -22501,13 +22502,11 @@ var AddInput = function (_React$Component) {
     _createClass(AddInput, [{
         key: 'render',
         value: function render() {
-            var listOfInputs = this.state.inputList.map(function (input, index) {
+            var listOfInputs = this.state.inputList.map(function (input) {
                 return _react2.default.createElement(
                     'div',
-                    { key: index },
-                    ' ',
-                    input,
-                    ' '
+                    null,
+                    input
                 );
             });
             return _react2.default.createElement(
@@ -22569,7 +22568,7 @@ var SingleInput = function (_React$Component) {
             e.preventDefault();
             if (typeof _this.props.onDone === 'function') {
                 console.log(e.target);
-                _this.props.onDone(index);
+                _this.props.onDone(_this.props.number);
             }
         };
 
