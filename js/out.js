@@ -22472,28 +22472,8 @@ var AddInput = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (AddInput.__proto__ || Object.getPrototypeOf(AddInput)).call(this, props));
 
-        _this.handleDeleteInput = function (num) {
-            console.log(num);
-            var newInputList = [];
-            for (var i = 0; i < _this.state.inputList.length; i++) {
-                //console.log(this.state.inputList[i].props.hasOwnProperty('number'));
-                //console.log(typeof(this.state.inputList[i]));
-                if (_this.state.inputList[i] === '') {
-                    console.log('tablica');
-                } else {
-                    if (_this.state.inputList[i].props.number !== num) {
-                        newInputList.push(_this.state.inputList[i]);
-                    } else {
-                        newInputList.push('');
-                    }
-                }
-            }
-            _this.setState({
-                inputList: newInputList
-            });
-        };
-
-        _this.handleAddInputClick = function () {
+        _this.handleAddInputClick = function (e) {
+            e.preventDefault();
             _this.setState({
                 counter: _this.state.counter + 1,
                 inputList: _this.state.inputList.concat([_this.state.counter])
@@ -22509,12 +22489,13 @@ var AddInput = function (_React$Component) {
     }
 
     _createClass(AddInput, [{
-        key: 'remove',
-        value: function remove(index) {
-            console.log('usuwasz');
-            console.log(this.state.inputList);
-            // let inputList = this.state.inputList;
-            // inputList.splice(index, 1);
+        key: 'handleDeleteInput',
+        value: function handleDeleteInput(index) {
+            console.log('usuwasz', index);
+            console.log('this', this);
+            console.log('this.inputList:', this.state.inputList);
+            var inputList = this.state.inputList;
+            //inputList.splice(index, 1);
             // this.setState({
             //   inputList : inputList
             // })
@@ -22536,7 +22517,7 @@ var AddInput = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_InputList2.default, { inputList: this.state.inputList, onRemove: this.remove }),
+                    _react2.default.createElement(_InputList2.default, { inputList: this.state.inputList, onRemove: this.handleDeleteInput }),
                     _react2.default.createElement(
                         'button',
                         { onClick: this.handleAddInputClick },
@@ -22569,9 +22550,9 @@ var _reactDom = __webpack_require__(81);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _SingleSubInput = __webpack_require__(186);
+var _SubInputList = __webpack_require__(188);
 
-var _SingleSubInput2 = _interopRequireDefault(_SingleSubInput);
+var _SubInputList2 = _interopRequireDefault(_SubInputList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22584,84 +22565,120 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SingleInput = function (_React$Component) {
     _inherits(SingleInput, _React$Component);
 
-    function SingleInput() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function SingleInput(props) {
         _classCallCheck(this, SingleInput);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (SingleInput.__proto__ || Object.getPrototypeOf(SingleInput)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = SingleInput.__proto__ || Object.getPrototypeOf(SingleInput)).call.apply(_ref, [this].concat(args))), _this), _this.handleDeleteClick = function (e) {
+        _this.handleDeleteClick = function (e) {
             e.preventDefault();
             console.log('klik delete');
             console.log(_this.props.index);
             if (typeof _this.props.onRemove2 === 'function') {
                 _this.props.onRemove2(_this.props.index);
             }
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.handleAddSubInputClick = function (e) {
+            e.preventDefault();
+            _this.setState({
+                counter: _this.state.counter + 1,
+                subInputList: _this.state.subInputList.concat([_this.state.counter])
+            });
+        };
+
+        _this.state = {
+            subInputList: [],
+            counter: 0
+        };
+        return _this;
     }
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         inputList : [],
-    //     };
-    // }
 
     _createClass(SingleInput, [{
         key: 'render',
-
-        //
-        // handleAddSubInputClick = (e) => {
-        //     e.preventDefault();
-        //     this.setState({
-        //         subInputList : this.state.subInputList.concat(<SingleSubInput/>),
-        //     })
-        // }
-
         value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                'Question',
-                _react2.default.createElement('input', { type: 'text' }),
-                _react2.default.createElement('br', null),
-                'Type',
-                _react2.default.createElement(
-                    'select',
+            if (this.state.counter === 0) {
+                return _react2.default.createElement(
+                    'div',
                     null,
+                    'Question',
+                    _react2.default.createElement('input', { type: 'text' }),
+                    _react2.default.createElement('br', null),
+                    'Type',
                     _react2.default.createElement(
-                        'option',
+                        'select',
                         null,
-                        ' text '
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' text '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' number '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' yes / no '
+                        )
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'subInput', onClick: this.handleAddSubInputClick },
+                        ' Add Sub-Input '
                     ),
                     _react2.default.createElement(
-                        'option',
+                        'button',
+                        { className: 'delete', onClick: this.handleDeleteClick },
+                        ' Delete '
+                    ),
+                    _react2.default.createElement('hr', null)
+                );
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    'Question',
+                    _react2.default.createElement('input', { type: 'text' }),
+                    _react2.default.createElement('br', null),
+                    'Type',
+                    _react2.default.createElement(
+                        'select',
                         null,
-                        ' number '
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' text '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' number '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' yes / no '
+                        )
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'subInput', onClick: this.handleAddSubInputClick },
+                        ' Add Sub-Input '
                     ),
                     _react2.default.createElement(
-                        'option',
-                        null,
-                        ' yes / no '
-                    )
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'button',
-                    { className: 'subInput', onClick: this.handleAddSubInputClick },
-                    ' Add Sub-Input '
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { className: 'delete', onClick: this.handleDeleteClick },
-                    ' Delete '
-                ),
-                _react2.default.createElement('hr', null)
-            );
+                        'button',
+                        { className: 'delete', onClick: this.handleDeleteClick },
+                        ' Delete '
+                    ),
+                    _react2.default.createElement('hr', null),
+                    _react2.default.createElement(_SubInputList2.default, { subInputList: this.state.subInputList })
+                );
+            }
         }
     }]);
 
@@ -22706,12 +22723,14 @@ var SingleSubInput = function (_React$Component) {
         _this.handleAddSubInputClick = function (e) {
             e.preventDefault();
             _this.setState({
-                subInputList: _this.state.subInputList.concat(_react2.default.createElement(SingleSubInput, null))
+                counter: _this.state.counter + 1,
+                subInputList: _this.state.subInputList.concat([_this.state.counter])
             });
         };
 
         _this.state = {
-            subInputList: []
+            subInputList: [],
+            counter: 0
         };
         return _this;
     }
@@ -22719,77 +22738,132 @@ var SingleSubInput = function (_React$Component) {
     _createClass(SingleSubInput, [{
         key: 'render',
         value: function render() {
-            var listOfSubInputs = this.state.subInputList.map(function (subInput, index) {
+            if (this.state.counter === 0) {
                 return _react2.default.createElement(
                     'div',
-                    { key: index },
-                    ' ',
-                    subInput,
-                    ' '
+                    { className: 'subInput' },
+                    'Condition',
+                    _react2.default.createElement(
+                        'select',
+                        null,
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' Equals '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' Greater than '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' Less than '
+                        )
+                    ),
+                    _react2.default.createElement('input', null),
+                    _react2.default.createElement('br', null),
+                    'Question',
+                    _react2.default.createElement('input', { type: 'text' }),
+                    _react2.default.createElement('br', null),
+                    'Type',
+                    _react2.default.createElement(
+                        'select',
+                        null,
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' text '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' number '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' yes / no '
+                        )
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'subInput', onClick: this.handleAddSubInputClick },
+                        ' Add Sub-Input '
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'delete', onClick: this.handleDeleteClick },
+                        ' Delete '
+                    ),
+                    _react2.default.createElement('hr', null)
                 );
-            });
-            return _react2.default.createElement(
-                'div',
-                { className: 'form' },
-                'Condition',
-                _react2.default.createElement(
-                    'select',
-                    null,
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    { className: 'subInput' },
+                    'Condition',
                     _react2.default.createElement(
-                        'option',
+                        'select',
                         null,
-                        ' Equals '
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' Equals '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' Greater than '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' Less than '
+                        )
+                    ),
+                    _react2.default.createElement('input', null),
+                    _react2.default.createElement('br', null),
+                    'Question',
+                    _react2.default.createElement('input', { type: 'text' }),
+                    _react2.default.createElement('br', null),
+                    'Type',
+                    _react2.default.createElement(
+                        'select',
+                        null,
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' text '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' number '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            null,
+                            ' yes / no '
+                        )
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'subInput', onClick: this.handleAddSubInputClick },
+                        ' Add Sub-Input '
                     ),
                     _react2.default.createElement(
-                        'option',
-                        null,
-                        ' Greater than '
+                        'button',
+                        { className: 'delete', onClick: this.handleDeleteClick },
+                        ' Delete '
                     ),
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        ' Less than '
-                    )
-                ),
-                _react2.default.createElement('input', null),
-                _react2.default.createElement('br', null),
-                'Question',
-                _react2.default.createElement('input', { type: 'text' }),
-                _react2.default.createElement('br', null),
-                'Type',
-                _react2.default.createElement(
-                    'select',
-                    null,
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        ' text '
-                    ),
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        ' number '
-                    ),
-                    _react2.default.createElement(
-                        'option',
-                        null,
-                        ' yes / no '
-                    )
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'button',
-                    { className: 'subInput', onClick: this.handleAddSubInputClick },
-                    ' Add Sub-Input '
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { className: 'delete', onClick: this.handleDeleteClick },
-                    ' Delete '
-                ),
-                _react2.default.createElement('hr', null),
-                listOfSubInputs
-            );
+                    _react2.default.createElement('hr', null),
+                    _react2.default.createElement(SubInputList, { subInputList: this.state.subInputList })
+                );
+            }
         }
     }]);
 
@@ -22865,6 +22939,62 @@ var InputList = function (_React$Component) {
 }(_react2.default.Component);
 
 module.exports = InputList;
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(81);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _SingleSubInput = __webpack_require__(186);
+
+var _SingleSubInput2 = _interopRequireDefault(_SingleSubInput);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SubInputList = function (_React$Component) {
+    _inherits(SubInputList, _React$Component);
+
+    function SubInputList() {
+        _classCallCheck(this, SubInputList);
+
+        return _possibleConstructorReturn(this, (SubInputList.__proto__ || Object.getPrototypeOf(SubInputList)).apply(this, arguments));
+    }
+
+    _createClass(SubInputList, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                this.props.subInputList.map(function (input, index) {
+                    return _react2.default.createElement(_SingleSubInput2.default, { key: 'item-' + index, index: index });
+                })
+            );
+        }
+    }]);
+
+    return SubInputList;
+}(_react2.default.Component);
+
+module.exports = SubInputList;
 
 /***/ })
 /******/ ]);

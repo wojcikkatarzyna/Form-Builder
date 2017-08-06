@@ -13,28 +13,8 @@ class AddInput extends React.Component{
         };
     }
 
-    handleDeleteInput = (num) => {
-        console.log(num);
-        let newInputList = [];
-        for (var i = 0; i < this.state.inputList.length; i++) {
-            //console.log(this.state.inputList[i].props.hasOwnProperty('number'));
-            //console.log(typeof(this.state.inputList[i]));
-            if (this.state.inputList[i] === '' ) {
-                console.log('tablica');
-            } else {
-                if(this.state.inputList[i].props.number !== num) {
-                  newInputList.push(this.state.inputList[i]);
-                } else {
-                  newInputList.push('');
-                }
-            }
-        }
-        this.setState({
-            inputList : newInputList
-        });
-    }
-
-    handleAddInputClick = () => {
+    handleAddInputClick = (e) => {
+        e.preventDefault();
         this.setState({
             counter : this.state.counter + 1,
             inputList : this.state.inputList.concat([this.state.counter]),
@@ -42,11 +22,12 @@ class AddInput extends React.Component{
         console.log(this.state.inputList);
     }
 
-    remove(index) {
-        console.log('usuwasz');
-        console.log(this.state.inputList);
-        // let inputList = this.state.inputList;
-        // inputList.splice(index, 1);
+    handleDeleteInput(index) {
+        console.log('usuwasz',index);
+        console.log('this',this);
+        console.log('this.inputList:',this.state.inputList);
+        let inputList = this.state.inputList;
+        //inputList.splice(index, 1);
         // this.setState({
         //   inputList : inputList
         // })
@@ -59,7 +40,7 @@ class AddInput extends React.Component{
                     </div>
         } else {
           return  <div>
-                      <InputList inputList={this.state.inputList}  onRemove={this.remove}/>
+                      <InputList inputList={this.state.inputList}  onRemove={this.handleDeleteInput}/>
                       <button onClick={this.handleAddInputClick}> Add Input </button>
                   </div>
         }
