@@ -22550,7 +22550,7 @@ var SingleInput = function (_React$Component) {
             if (this.state.counter === 0) {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'singleInput' },
                     'Question',
                     _react2.default.createElement('input', { type: 'text', placeholder: 'please, type here your question', onChange: this.handleQuestionChange }),
                     _react2.default.createElement('br', null),
@@ -22595,7 +22595,7 @@ var SingleInput = function (_React$Component) {
             } else {
                 return _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'singleInput' },
                     'Question',
                     _react2.default.createElement('input', { type: 'text' }),
                     _react2.default.createElement('br', null),
@@ -22701,7 +22701,7 @@ var SingleSubInput = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                { className: 'subInput' },
+                { className: 'singleSubInput' },
                 'Condition',
                 _react2.default.createElement(
                     'select',
@@ -23052,20 +23052,145 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var savedQuestions = localStorage.getItem('userQuestions');
-
 var Preview = function (_React$Component) {
     _inherits(Preview, _React$Component);
 
     function Preview() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, Preview);
 
-        return _possibleConstructorReturn(this, (Preview.__proto__ || Object.getPrototypeOf(Preview)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Preview.__proto__ || Object.getPrototypeOf(Preview)).call.apply(_ref, [this].concat(args))), _this), _this.addForm = function (question, type) {
+            if (type === 'yes/no') {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'question'
+                    ),
+                    _react2.default.createElement(
+                        'form',
+                        null,
+                        _react2.default.createElement(
+                            'input',
+                            { type: 'radio', value: 'yes' },
+                            ' Yes '
+                        ),
+                        _react2.default.createElement(
+                            'input',
+                            { type: 'radio', value: 'no' },
+                            ' No '
+                        )
+                    )
+                );
+            } else if (type === 'number') {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'question'
+                    ),
+                    _react2.default.createElement(
+                        'form',
+                        null,
+                        _react2.default.createElement('input', { type: 'number', placeholder: 'insert number' })
+                    )
+                );
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'question'
+                    ),
+                    _react2.default.createElement(
+                        'form',
+                        null,
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'insert text' })
+                    )
+                );
+            }
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Preview, [{
         key: 'render',
         value: function render() {
+            var savedQuestions = localStorage.getItem('userQuestions');
+            var questionArray = JSON.parse(savedQuestions);
+            var formular = questionArray.map(function (element, index) {
+                if (element.type === 'yes / no') {
+                    return _react2.default.createElement(
+                        'div',
+                        { key: index },
+                        _react2.default.createElement(
+                            'span',
+                            null,
+                            ' ',
+                            element.question,
+                            ' '
+                        ),
+                        _react2.default.createElement(
+                            'form',
+                            null,
+                            _react2.default.createElement('input', { type: 'radio', name: 'yes', value: 'yes' }),
+                            ' YES',
+                            _react2.default.createElement('input', { type: 'radio', name: 'no', value: 'no' }),
+                            ' NO'
+                        ),
+                        _react2.default.createElement('br', null)
+                    );
+                } else if (element.type === 'number') {
+                    return _react2.default.createElement(
+                        'div',
+                        { key: index },
+                        _react2.default.createElement(
+                            'span',
+                            null,
+                            ' ',
+                            element.question,
+                            ' '
+                        ),
+                        _react2.default.createElement(
+                            'form',
+                            null,
+                            _react2.default.createElement('input', { type: 'number', placeholder: 'insert number' })
+                        ),
+                        _react2.default.createElement('br', null)
+                    );
+                } else {
+                    return _react2.default.createElement(
+                        'div',
+                        { key: index },
+                        _react2.default.createElement(
+                            'span',
+                            null,
+                            ' ',
+                            element.question,
+                            ' '
+                        ),
+                        _react2.default.createElement(
+                            'form',
+                            null,
+                            _react2.default.createElement('input', { type: 'text', placeholder: 'insert text' })
+                        ),
+                        _react2.default.createElement('br', null)
+                    );
+                }
+            });
+
             return _react2.default.createElement(
                 'section',
                 { className: 'preview' },
@@ -23088,7 +23213,7 @@ var Preview = function (_React$Component) {
                         ' EXPORT '
                     )
                 ),
-                savedQuestions
+                formular
             );
         }
     }]);

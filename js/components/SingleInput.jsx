@@ -54,7 +54,7 @@ class SingleInput extends React.Component{
 
     render(){
         if (this.state.counter === 0) {
-            return <div>
+            return <div className="singleInput">
                             Question
                             <input type="text" placeholder="please, type here your question" onChange={this.handleQuestionChange}/>
                             <br/>
@@ -71,7 +71,7 @@ class SingleInput extends React.Component{
                             <hr/>
                       </div>
         } else {
-          return  <div>
+          return  <div className="singleInput">
                           Question
                           <input type="text"/>
                           <br/>

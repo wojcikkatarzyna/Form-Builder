@@ -20,7 +20,7 @@ class SingleSubInput extends React.Component{
     }
 
     render(){
-            return <div className = "subInput">
+            return <div className = "singleSubInput">
                           Condition
                           <select>
                               <option> Equals </option>

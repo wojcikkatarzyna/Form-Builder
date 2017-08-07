@@ -10,15 +10,26 @@ header{
     background-color: grey;
     text-align: center;
     width: 600px;
+    margin: 0 25px;
 }
 
 main{
     padding: 25px 0;
     width: 600px;
+    margin: 0 25px;
 }
 
 section{
     padding: 25px 0;
+}
+
+.singleInput{
+    padding: 5px 0;
+}
+
+.singleSubInput{
+    padding: 5px 0;
+    margin-left: 25px;
 }
 
 .title{
@@ -51,4 +62,5 @@ footer{
     background-color: grey;
     text-align: center;
     width: 600px;
+    margin: 0 25px;
 }
