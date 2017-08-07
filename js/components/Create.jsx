@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import SingleInput from './SingleInput.jsx';
 import InputList from './InputList.jsx';
 
-class AddInput extends React.Component{
+class Create extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -19,7 +18,6 @@ class AddInput extends React.Component{
             counter : this.state.counter + 1,
             inputList : this.state.inputList.concat([this.state.counter]),
         })
-        console.log(this.state.inputList);
     }
 
     handleDeleteInput(index) {
@@ -35,16 +33,18 @@ class AddInput extends React.Component{
 
     render(){
         if (this.state.counter === 0) {
-            return <div>
+            return <section className="create">
+                        <div> CREATE </div>
                         <button onClick={this.handleAddInputClick}> Add Input </button>
-                    </div>
+                    </section>
         } else {
-          return  <div>
+          return  <section className="create">
+                      <div> CREATE </div>
                       <InputList inputList={this.state.inputList}  onRemove={this.handleDeleteInput}/>
                       <button onClick={this.handleAddInputClick}> Add Input </button>
-                  </div>
+                  </section>
         }
     }
 }
 
-module.exports = AddInput;
+module.exports = Create;

@@ -9773,9 +9773,17 @@ var _reactDom = __webpack_require__(81);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _AddInput = __webpack_require__(184);
+var _Create = __webpack_require__(189);
 
-var _AddInput2 = _interopRequireDefault(_AddInput);
+var _Create2 = _interopRequireDefault(_Create);
+
+var _Preview = __webpack_require__(190);
+
+var _Preview2 = _interopRequireDefault(_Preview);
+
+var _Export = __webpack_require__(191);
+
+var _Export2 = _interopRequireDefault(_Export);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9805,7 +9813,27 @@ document.addEventListener('DOMContentLoaded', function () {
         _createClass(App, [{
             key: 'render',
             value: function render() {
-                return _react2.default.createElement(_AddInput2.default, null);
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'header',
+                        null,
+                        ' FORM BUILDER '
+                    ),
+                    _react2.default.createElement(
+                        'main',
+                        null,
+                        _react2.default.createElement(_Create2.default, null),
+                        _react2.default.createElement(_Preview2.default, null),
+                        _react2.default.createElement(_Export2.default, null)
+                    ),
+                    _react2.default.createElement(
+                        'footer',
+                        null,
+                        ' Form Builder | Katarzyna W\xF3jcik '
+                    )
+                );
             }
         }]);
 
@@ -22432,108 +22460,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 184 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(82);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(81);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _SingleInput = __webpack_require__(185);
-
-var _SingleInput2 = _interopRequireDefault(_SingleInput);
-
-var _InputList = __webpack_require__(187);
-
-var _InputList2 = _interopRequireDefault(_InputList);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AddInput = function (_React$Component) {
-    _inherits(AddInput, _React$Component);
-
-    function AddInput(props) {
-        _classCallCheck(this, AddInput);
-
-        var _this = _possibleConstructorReturn(this, (AddInput.__proto__ || Object.getPrototypeOf(AddInput)).call(this, props));
-
-        _this.handleAddInputClick = function (e) {
-            e.preventDefault();
-            _this.setState({
-                counter: _this.state.counter + 1,
-                inputList: _this.state.inputList.concat([_this.state.counter])
-            });
-            console.log(_this.state.inputList);
-        };
-
-        _this.state = {
-            inputList: [],
-            counter: 0
-        };
-        return _this;
-    }
-
-    _createClass(AddInput, [{
-        key: 'handleDeleteInput',
-        value: function handleDeleteInput(index) {
-            console.log('usuwasz', index);
-            console.log('this', this);
-            console.log('this.inputList:', this.state.inputList);
-            var inputList = this.state.inputList;
-            //inputList.splice(index, 1);
-            // this.setState({
-            //   inputList : inputList
-            // })
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            if (this.state.counter === 0) {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: this.handleAddInputClick },
-                        ' Add Input '
-                    )
-                );
-            } else {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_InputList2.default, { inputList: this.state.inputList, onRemove: this.handleDeleteInput }),
-                    _react2.default.createElement(
-                        'button',
-                        { onClick: this.handleAddInputClick },
-                        ' Add Input '
-                    )
-                );
-            }
-        }
-    }]);
-
-    return AddInput;
-}(_react2.default.Component);
-
-module.exports = AddInput;
-
-/***/ }),
+/* 184 */,
 /* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22562,6 +22489,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var myStorage = localStorage;
+var questionsArray = [];
+
 var SingleInput = function (_React$Component) {
     _inherits(SingleInput, _React$Component);
 
@@ -22587,9 +22517,29 @@ var SingleInput = function (_React$Component) {
             });
         };
 
+        _this.handleQuestionChange = function (e) {
+            e.preventDefault();
+            _this.setState({
+                currentQuestion: e.target.value
+            });
+        };
+
+        _this.handleTypeChange = function (e) {
+            e.preventDefault();
+            console.log(_this.state.currentQuestion, e.target.value);
+            questionsArray.push({
+                question: _this.state.currentQuestion,
+                type: e.target.value
+            });
+            var question = JSON.stringify(questionsArray);
+            localStorage.setItem("userQuestions", question);
+        };
+
         _this.state = {
             subInputList: [],
-            counter: 0
+            counter: 0,
+            questionList: [],
+            typeList: []
         };
         return _this;
     }
@@ -22602,25 +22552,30 @@ var SingleInput = function (_React$Component) {
                     'div',
                     null,
                     'Question',
-                    _react2.default.createElement('input', { type: 'text' }),
+                    _react2.default.createElement('input', { type: 'text', placeholder: 'please, type here your question', onChange: this.handleQuestionChange }),
                     _react2.default.createElement('br', null),
                     'Type',
                     _react2.default.createElement(
                         'select',
-                        null,
+                        { onChange: this.handleTypeChange },
                         _react2.default.createElement(
                             'option',
-                            null,
+                            { key: 'choose' },
+                            ' ---please, choose type of your answer--- '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            { key: 'text' },
                             ' text '
                         ),
                         _react2.default.createElement(
                             'option',
-                            null,
+                            { key: 'number' },
                             ' number '
                         ),
                         _react2.default.createElement(
                             'option',
-                            null,
+                            { key: 'radio' },
                             ' yes / no '
                         )
                     ),
@@ -22647,20 +22602,25 @@ var SingleInput = function (_React$Component) {
                     'Type',
                     _react2.default.createElement(
                         'select',
-                        null,
+                        { onChange: this.handleTypeChange },
                         _react2.default.createElement(
                             'option',
-                            null,
+                            { key: 'choose' },
+                            ' ---choose type of answer--- '
+                        ),
+                        _react2.default.createElement(
+                            'option',
+                            { key: 'text' },
                             ' text '
                         ),
                         _react2.default.createElement(
                             'option',
-                            null,
+                            { key: 'number' },
                             ' number '
                         ),
                         _react2.default.createElement(
                             'option',
-                            null,
+                            { key: 'radio' },
                             ' yes / no '
                         )
                     ),
@@ -22722,6 +22682,7 @@ var SingleSubInput = function (_React$Component) {
 
         _this.handleAddSubInputClick = function (e) {
             e.preventDefault();
+            console.log('dodano');
             _this.setState({
                 counter: _this.state.counter + 1,
                 subInputList: _this.state.subInputList.concat([_this.state.counter])
@@ -22738,132 +22699,67 @@ var SingleSubInput = function (_React$Component) {
     _createClass(SingleSubInput, [{
         key: 'render',
         value: function render() {
-            if (this.state.counter === 0) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'subInput' },
-                    'Condition',
+            return _react2.default.createElement(
+                'div',
+                { className: 'subInput' },
+                'Condition',
+                _react2.default.createElement(
+                    'select',
+                    null,
                     _react2.default.createElement(
-                        'select',
+                        'option',
                         null,
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' Equals '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' Greater than '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' Less than '
-                        )
+                        ' Equals '
                     ),
-                    _react2.default.createElement('input', null),
-                    _react2.default.createElement('br', null),
-                    'Question',
-                    _react2.default.createElement('input', { type: 'text' }),
-                    _react2.default.createElement('br', null),
-                    'Type',
                     _react2.default.createElement(
-                        'select',
+                        'option',
                         null,
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' text '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' number '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' yes / no '
-                        )
-                    ),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement(
-                        'button',
-                        { className: 'subInput', onClick: this.handleAddSubInputClick },
-                        ' Add Sub-Input '
+                        ' Greater than '
                     ),
                     _react2.default.createElement(
-                        'button',
-                        { className: 'delete', onClick: this.handleDeleteClick },
-                        ' Delete '
-                    ),
-                    _react2.default.createElement('hr', null)
-                );
-            } else {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'subInput' },
-                    'Condition',
-                    _react2.default.createElement(
-                        'select',
+                        'option',
                         null,
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' Equals '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' Greater than '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' Less than '
-                        )
-                    ),
-                    _react2.default.createElement('input', null),
-                    _react2.default.createElement('br', null),
-                    'Question',
-                    _react2.default.createElement('input', { type: 'text' }),
-                    _react2.default.createElement('br', null),
-                    'Type',
+                        ' Less than '
+                    )
+                ),
+                _react2.default.createElement('input', null),
+                _react2.default.createElement('br', null),
+                'Question',
+                _react2.default.createElement('input', { type: 'text' }),
+                _react2.default.createElement('br', null),
+                'Type',
+                _react2.default.createElement(
+                    'select',
+                    null,
                     _react2.default.createElement(
-                        'select',
+                        'option',
                         null,
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' text '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' number '
-                        ),
-                        _react2.default.createElement(
-                            'option',
-                            null,
-                            ' yes / no '
-                        )
-                    ),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement(
-                        'button',
-                        { className: 'subInput', onClick: this.handleAddSubInputClick },
-                        ' Add Sub-Input '
+                        ' text '
                     ),
                     _react2.default.createElement(
-                        'button',
-                        { className: 'delete', onClick: this.handleDeleteClick },
-                        ' Delete '
+                        'option',
+                        null,
+                        ' number '
                     ),
-                    _react2.default.createElement('hr', null),
-                    _react2.default.createElement(SubInputList, { subInputList: this.state.subInputList })
-                );
-            }
+                    _react2.default.createElement(
+                        'option',
+                        null,
+                        ' yes / no '
+                    )
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'subInput', onClick: this.handleAddSubInputClick },
+                    ' Add Sub-Input '
+                ),
+                _react2.default.createElement(
+                    'button',
+                    { className: 'delete', onClick: this.handleDeleteClick },
+                    ' Delete '
+                ),
+                _react2.default.createElement('hr', null)
+            );
         }
     }]);
 
@@ -22995,6 +22891,227 @@ var SubInputList = function (_React$Component) {
 }(_react2.default.Component);
 
 module.exports = SubInputList;
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(81);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _InputList = __webpack_require__(187);
+
+var _InputList2 = _interopRequireDefault(_InputList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Create = function (_React$Component) {
+    _inherits(Create, _React$Component);
+
+    function Create(props) {
+        _classCallCheck(this, Create);
+
+        var _this = _possibleConstructorReturn(this, (Create.__proto__ || Object.getPrototypeOf(Create)).call(this, props));
+
+        _this.handleAddInputClick = function (e) {
+            e.preventDefault();
+            _this.setState({
+                counter: _this.state.counter + 1,
+                inputList: _this.state.inputList.concat([_this.state.counter])
+            });
+        };
+
+        _this.state = {
+            inputList: [],
+            counter: 0
+        };
+        return _this;
+    }
+
+    _createClass(Create, [{
+        key: 'handleDeleteInput',
+        value: function handleDeleteInput(index) {
+            console.log('usuwasz', index);
+            console.log('this', this);
+            console.log('this.inputList:', this.state.inputList);
+            var inputList = this.state.inputList;
+            //inputList.splice(index, 1);
+            // this.setState({
+            //   inputList : inputList
+            // })
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (this.state.counter === 0) {
+                return _react2.default.createElement(
+                    'section',
+                    { className: 'create' },
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        ' CREATE '
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.handleAddInputClick },
+                        ' Add Input '
+                    )
+                );
+            } else {
+                return _react2.default.createElement(
+                    'section',
+                    { className: 'create' },
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        ' CREATE '
+                    ),
+                    _react2.default.createElement(_InputList2.default, { inputList: this.state.inputList, onRemove: this.handleDeleteInput }),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.handleAddInputClick },
+                        ' Add Input '
+                    )
+                );
+            }
+        }
+    }]);
+
+    return Create;
+}(_react2.default.Component);
+
+module.exports = Create;
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(81);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var savedQuestions = localStorage.getItem('userQuestions');
+
+var Preview = function (_React$Component) {
+    _inherits(Preview, _React$Component);
+
+    function Preview() {
+        _classCallCheck(this, Preview);
+
+        return _possibleConstructorReturn(this, (Preview.__proto__ || Object.getPrototypeOf(Preview)).apply(this, arguments));
+    }
+
+    _createClass(Preview, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'section',
+                { className: 'preview' },
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    ' PREVIEW '
+                ),
+                savedQuestions
+            );
+        }
+    }]);
+
+    return Preview;
+}(_react2.default.Component);
+
+module.exports = Preview;
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(82);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(81);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var savedQuestions = localStorage.getItem('userQuestions');
+
+var Export = function (_React$Component) {
+    _inherits(Export, _React$Component);
+
+    function Export() {
+        _classCallCheck(this, Export);
+
+        return _possibleConstructorReturn(this, (Export.__proto__ || Object.getPrototypeOf(Export)).apply(this, arguments));
+    }
+
+    _createClass(Export, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'section',
+                { className: 'export' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'title' },
+                    ' EXPORT '
+                ),
+                savedQuestions
+            );
+        }
+    }]);
+
+    return Export;
+}(_react2.default.Component);
+
+module.exports = Export;
 
 /***/ })
 /******/ ]);

@@ -8,14 +8,23 @@ import ReactDOM from 'react-dom';
 //     hashHistory
 // } from 'react-router';
 
-import AddInput from './components/AddInput.jsx';
+import Create from './components/Create.jsx';
+import Preview from './components/Preview.jsx';
+import Export from './components/Export.jsx';
 
 document.addEventListener('DOMContentLoaded', function(){
 
     class App extends React.Component{
         render(){
-            return(
-                <AddInput />
+            return(   <div>
+                          <header> FORM BUILDER </header>
+                          <main>
+                              <Create />
+                              <Preview />
+                              <Export />
+                          </main>
+                          <footer> Form Builder | Katarzyna Wójcik </footer>
+                      </div>
             );
         }
     }

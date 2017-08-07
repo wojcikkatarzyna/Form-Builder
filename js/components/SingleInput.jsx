@@ -3,12 +3,17 @@ import ReactDOM from 'react-dom';
 
 import SubInputList from './SubInputList.jsx'
 
+const myStorage = localStorage;
+const questionsArray = [];
+
 class SingleInput extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             subInputList : [],
             counter : 0,
+            questionList : [],
+            typeList : [],
         };
     }
 
@@ -29,17 +34,36 @@ class SingleInput extends React.Component{
         })
     }
 
+    handleQuestionChange = (e) => {
+        e.preventDefault();
+        this.setState({
+            currentQuestion : e.target.value,
+        })
+    }
+
+    handleTypeChange = (e) => {
+        e.preventDefault();
+        console.log(this.state.currentQuestion, e.target.value);
+        questionsArray.push({
+            question: this.state.currentQuestion,
+            type: e.target.value,
+        });
+        let question = JSON.stringify(questionsArray);
+        localStorage.setItem("userQuestions", question);
+    }
+
     render(){
         if (this.state.counter === 0) {
             return <div>
                             Question
-                            <input type="text"/>
+                            <input type="text" placeholder="please, type here your question" onChange={this.handleQuestionChange}/>
                             <br/>
                             Type
-                            <select>
-                                <option> text </option>
-                                <option> number </option>
-                                <option> yes / no </option>
+                            <select onChange={this.handleTypeChange}>
+                                <option key="choose"> ---please, choose type of your answer--- </option>
+                                <option key="text"> text </option>
+                                <option key="number"> number </option>
+                                <option key="radio"> yes / no </option>
                             </select>
                             <br/>
                             <button className = "subInput" onClick={this.handleAddSubInputClick}> Add Sub-Input </button>
@@ -52,10 +76,11 @@ class SingleInput extends React.Component{
                           <input type="text"/>
                           <br/>
                           Type
-                          <select>
-                              <option> text </option>
-                              <option> number </option>
-                              <option> yes / no </option>
+                          <select onChange={this.handleTypeChange}>
+                              <option key="choose"> ---choose type of answer--- </option>
+                              <option key="text"> text </option>
+                              <option key="number"> number </option>
+                              <option key="radio"> yes / no </option>
                           </select>
                           <br/>
                           <button className = "subInput" onClick={this.handleAddSubInputClick}> Add Sub-Input </button>
