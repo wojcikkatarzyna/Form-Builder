@@ -22964,9 +22964,23 @@ var Create = function (_React$Component) {
                     'section',
                     { className: 'create' },
                     _react2.default.createElement(
-                        'div',
-                        null,
-                        ' CREATE '
+                        'ul',
+                        { className: 'title' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'currentTitle' },
+                            ' CREATE '
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            ' PREVIEW '
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            ' EXPORT '
+                        )
                     ),
                     _react2.default.createElement(
                         'button',
@@ -22979,9 +22993,23 @@ var Create = function (_React$Component) {
                     'section',
                     { className: 'create' },
                     _react2.default.createElement(
-                        'div',
-                        null,
-                        ' CREATE '
+                        'ul',
+                        { className: 'title' },
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'currentTitle' },
+                            ' CREATE '
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            ' PREVIEW '
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            ' EXPORT '
+                        )
                     ),
                     _react2.default.createElement(_InputList2.default, { inputList: this.state.inputList, onRemove: this.handleDeleteInput }),
                     _react2.default.createElement(
@@ -23042,9 +23070,23 @@ var Preview = function (_React$Component) {
                 'section',
                 { className: 'preview' },
                 _react2.default.createElement(
-                    'div',
-                    null,
-                    ' PREVIEW '
+                    'ul',
+                    { className: 'title' },
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        ' CREATE '
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        { className: 'currentTitle' },
+                        ' PREVIEW '
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        ' EXPORT '
+                    )
                 ),
                 savedQuestions
             );
@@ -23099,11 +23141,29 @@ var Export = function (_React$Component) {
                 'section',
                 { className: 'export' },
                 _react2.default.createElement(
-                    'div',
+                    'ul',
                     { className: 'title' },
-                    ' EXPORT '
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        ' CREATE '
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        ' PREVIEW '
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        { className: 'currentTitle' },
+                        ' EXPORT '
+                    )
                 ),
-                savedQuestions
+                _react2.default.createElement(
+                    'div',
+                    { className: 'exportBox' },
+                    savedQuestions
+                )
             );
         }
     }]);

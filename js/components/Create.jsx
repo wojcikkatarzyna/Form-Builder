@@ -34,12 +34,20 @@ class Create extends React.Component{
     render(){
         if (this.state.counter === 0) {
             return <section className="create">
-                        <div> CREATE </div>
+                        <ul className="title">
+                            <li className="currentTitle"> CREATE </li>
+                            <li> PREVIEW </li>
+                            <li> EXPORT </li>
+                        </ul>
                         <button onClick={this.handleAddInputClick}> Add Input </button>
                     </section>
         } else {
           return  <section className="create">
-                      <div> CREATE </div>
+                      <ul className="title">
+                          <li className="currentTitle"> CREATE </li>
+                          <li> PREVIEW </li>
+                          <li> EXPORT </li>
+                      </ul>
                       <InputList inputList={this.state.inputList}  onRemove={this.handleDeleteInput}/>
                       <button onClick={this.handleAddInputClick}> Add Input </button>
                   </section>

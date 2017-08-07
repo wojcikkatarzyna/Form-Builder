@@ -5,8 +5,14 @@ const savedQuestions = localStorage.getItem('userQuestions');
 class Export extends React.Component{
     render(){
         return  <section className="export">
-                    <div className="title"> EXPORT </div>
-                    {savedQuestions}
+                    <ul className="title">
+                        <li> CREATE </li>
+                        <li> PREVIEW </li>
+                        <li className="currentTitle"> EXPORT </li>
+                    </ul>
+                    <div className="exportBox">
+                        {savedQuestions}
+                    </div>
                 </section>
     }
 }
