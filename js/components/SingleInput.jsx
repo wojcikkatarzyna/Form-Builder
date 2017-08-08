@@ -43,7 +43,6 @@ class SingleInput extends React.Component{
 
     handleTypeChange = (e) => {
         e.preventDefault();
-        console.log(this.state.currentQuestion, e.target.value);
         questionsArray.push({
             question: this.state.currentQuestion,
             type: e.target.value,
@@ -73,7 +72,7 @@ class SingleInput extends React.Component{
         } else {
           return  <div className="singleInput">
                           Question
-                          <input type="text"/>
+                          <input type="text" placeholder="please, type here your question" onChange={this.handleQuestionChange}/>
                           <br/>
                           Type
                           <select onChange={this.handleTypeChange}>

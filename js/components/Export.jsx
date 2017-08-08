@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const savedQuestions = localStorage.getItem('userQuestions');
+const savedSubQuestions = localStorage.getItem('userSubQuestions');
+
 class Export extends React.Component{
     render(){
         return  <section className="export">
@@ -12,6 +14,7 @@ class Export extends React.Component{
                     </ul>
                     <div className="exportBox">
                         {savedQuestions}
+                        {savedSubQuestions}
                     </div>
                 </section>
     }

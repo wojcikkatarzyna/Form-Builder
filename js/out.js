@@ -22526,7 +22526,6 @@ var SingleInput = function (_React$Component) {
 
         _this.handleTypeChange = function (e) {
             e.preventDefault();
-            console.log(_this.state.currentQuestion, e.target.value);
             questionsArray.push({
                 question: _this.state.currentQuestion,
                 type: e.target.value
@@ -22597,7 +22596,7 @@ var SingleInput = function (_React$Component) {
                     'div',
                     { className: 'singleInput' },
                     'Question',
-                    _react2.default.createElement('input', { type: 'text' }),
+                    _react2.default.createElement('input', { type: 'text', placeholder: 'please, type here your question', onChange: this.handleQuestionChange }),
                     _react2.default.createElement('br', null),
                     'Type',
                     _react2.default.createElement(
@@ -22672,6 +22671,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var subInputArray = [];
+
 var SingleSubInput = function (_React$Component) {
     _inherits(SingleSubInput, _React$Component);
 
@@ -22689,9 +22690,48 @@ var SingleSubInput = function (_React$Component) {
             });
         };
 
+        _this.handleConditionChange = function (e) {
+            e.preventDefault();
+            _this.setState({
+                currentCondition: e.target.value
+            });
+        };
+
+        _this.handleAnswerChange = function (e) {
+            e.preventDefault();
+            _this.setState({
+                currentAnswer: e.target.value
+            });
+        };
+
+        _this.handleSubQuestionChange = function (e) {
+            e.preventDefault();
+            _this.setState({
+                currentQuestion: e.target.value
+            });
+        };
+
+        _this.handleTypeChange = function (e) {
+            e.preventDefault();
+            _this.setState({
+                currentType: e.target.value
+            });
+            subInputArray.push({
+                index: _this.state.index,
+                condition: _this.state.currentCondition,
+                answer: _this.state.currentAnswer,
+                subQuestion: _this.state.currentQuestion,
+                subType: e.target.value
+            });
+            console.log(_this.state.currentAnswer, _this.state.currentQuestion, e.target.value);
+            var subQuestions = JSON.stringify(subInputArray);
+            localStorage.setItem("userSubQuestions", subQuestions);
+        };
+
         _this.state = {
             subInputList: [],
-            counter: 0
+            counter: 0,
+            index: _this.props.index
         };
         return _this;
     }
@@ -22705,45 +22745,55 @@ var SingleSubInput = function (_React$Component) {
                 'Condition',
                 _react2.default.createElement(
                     'select',
-                    null,
+                    { onChange: this.handleConditionChange },
                     _react2.default.createElement(
                         'option',
-                        null,
+                        { key: 'choose' },
+                        ' ---choose your condition--- '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        { key: 'equals' },
                         ' Equals '
                     ),
                     _react2.default.createElement(
                         'option',
-                        null,
+                        { key: 'greater' },
                         ' Greater than '
                     ),
                     _react2.default.createElement(
                         'option',
-                        null,
+                        { key: 'less' },
                         ' Less than '
                     )
                 ),
-                _react2.default.createElement('input', null),
+                _react2.default.createElement('input', { placeholder: 'please, type here your answer', onChange: this.handleAnswerChange }),
                 _react2.default.createElement('br', null),
                 'Question',
-                _react2.default.createElement('input', { type: 'text' }),
+                _react2.default.createElement('input', { type: 'text', placeholder: 'please, type here your question', onChange: this.handleSubQuestionChange }),
                 _react2.default.createElement('br', null),
                 'Type',
                 _react2.default.createElement(
                     'select',
-                    null,
+                    { onChange: this.handleTypeChange },
                     _react2.default.createElement(
                         'option',
-                        null,
+                        { key: 'choose' },
+                        ' ---choose type of answer--- '
+                    ),
+                    _react2.default.createElement(
+                        'option',
+                        { key: 'text' },
                         ' text '
                     ),
                     _react2.default.createElement(
                         'option',
-                        null,
+                        { key: 'number' },
                         ' number '
                     ),
                     _react2.default.createElement(
                         'option',
-                        null,
+                        { key: 'radio' },
                         ' yes / no '
                     )
                 ),
@@ -23249,6 +23299,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var savedQuestions = localStorage.getItem('userQuestions');
+var savedSubQuestions = localStorage.getItem('userSubQuestions');
 
 var Export = function (_React$Component) {
     _inherits(Export, _React$Component);
@@ -23287,7 +23338,8 @@ var Export = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'exportBox' },
-                    savedQuestions
+                    savedQuestions,
+                    savedSubQuestions
                 )
             );
         }
