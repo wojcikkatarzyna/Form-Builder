@@ -1,71 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router,
+    Route,
+    Link,
+    IndexLink,
+    IndexRoute,
+    hashHistory
+} from 'react-router';
+
+import RadioForm from './RadioForm.jsx';
+import TextForm from './TextForm.jsx';
+import NumberForm from './NumberForm.jsx';
 
 class Preview extends React.Component{
-
-    addForm = (question, type) => {
-        if (type === 'yes/no') {
-            return  <div>
-                        <span>question</span>
-                          <form>
-                              <input type="radio" value="yes"> Yes </input>
-                              <input type="radio" value="no"> No </input>
-                          </form>
-                    </div>
-        } else if (type === 'number') {
-            return  <div>
-                        <span>question</span>
-                          <form>
-                              <input type="number" placeholder="insert number"/>
-                          </form>
-                    </div>
-        } else {
-            return  <div>
-                        <span>question</span>
-                          <form>
-                              <input type="text" placeholder="insert text"/>
-                          </form>
-                    </div>
-        }
-    }
 
     render(){
           const savedQuestions = localStorage.getItem('userQuestions');
           const questionArray = JSON.parse(savedQuestions);
+
           const formular = questionArray.map( (element, index) => {
-              if (element.type === 'yes / no') {
-                  return  <div key={index}>
-                              <span> {element.question} </span>
-                              <form>
-                                  <input type="radio" name="yes" value="yes"/> YES
-                                  <input type="radio" name="no" value="no"/> NO
-                              </form>
-                              <br/>
-                          </div>
+              if (element.type === 'yesno') {
+                  return  <RadioForm key={index} index={index} question={element.question} />
               } else if (element.type === 'number') {
-                  return  <div key={index}>
-                              <span> {element.question} </span>
-                              <form>
-                                  <input type="number" placeholder="insert number"/>
-                              </form>
-                              <br/>
-                          </div>
+                  return  <NumberForm  key={index}  index={index} question={element.question} />
               } else {
-                  return  <div key={index}>
-                              <span> {element.question} </span>
-                              <form>
-                                  <input type="text" placeholder="insert text"/>
-                              </form>
-                              <br/>
-                          </div>
+                  return  <TextForm  key={index}  index={index} question={element.question} />
               }
           })
 
           return  <section className="preview">
                       <ul className="title">
-                          <li> CREATE </li>
-                          <li className="currentTitle"> PREVIEW </li>
-                          <li> EXPORT </li>
+                          <li> <Link to="/"> CREATE </Link></li>
+                          <li className="currentTitle"> <Link to="/preview"> PREVIEW </Link></li>
+                          <li> <Link to="/export"> EXPORT </Link></li>
                       </ul>
                       {formular}
                   </section>

@@ -1,5 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router,
+    Route,
+    Link,
+    IndexLink,
+    IndexRoute,
+    hashHistory
+} from 'react-router';
 
 import InputList from './InputList.jsx';
 
@@ -35,18 +42,18 @@ class Create extends React.Component{
         if (this.state.counter === 0) {
             return <section className="create">
                         <ul className="title">
-                            <li className="currentTitle"> CREATE </li>
-                            <li> PREVIEW </li>
-                            <li> EXPORT </li>
+                            <li className="currentTitle"> <Link to="/"> CREATE </Link></li>
+                            <li> <Link to="/preview"> PREVIEW </Link></li>
+                            <li> <Link to="/export"> EXPORT </Link></li>
                         </ul>
                         <button onClick={this.handleAddInputClick}> Add Input </button>
                     </section>
         } else {
           return  <section className="create">
                       <ul className="title">
-                          <li className="currentTitle"> CREATE </li>
-                          <li> PREVIEW </li>
-                          <li> EXPORT </li>
+                          <li className="currentTitle"> <Link to="/"> CREATE </Link></li>
+                          <li> <Link to="/preview"> PREVIEW </Link></li>
+                          <li> <Link to="/export"> EXPORT </Link></li>
                       </ul>
                       <InputList inputList={this.state.inputList}  onRemove={this.handleDeleteInput}/>
                       <button onClick={this.handleAddInputClick}> Add Input </button>

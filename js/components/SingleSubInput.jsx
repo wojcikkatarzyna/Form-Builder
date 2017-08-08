@@ -77,9 +77,9 @@ class SingleSubInput extends React.Component{
                           Type
                           <select onChange={this.handleTypeChange}>
                               <option key="choose"> ---choose type of answer--- </option>
-                              <option key="text"> text </option>
-                              <option key="number"> number </option>
-                              <option key="radio"> yes / no </option>
+                              <option key="text" value="text"> text </option>
+                              <option key="number" value="number"> number </option>
+                              <option key="radio" value="yesno"> yes / no </option>
                           </select>
                           <br/>
                           <button className = "subInput" onClick={this.handleAddSubInputClick}> Add Sub-Input </button>

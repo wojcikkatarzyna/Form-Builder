@@ -1,5 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router,
+    Route,
+    Link,
+    IndexLink,
+    IndexRoute,
+    hashHistory
+} from 'react-router';
 
 const savedQuestions = localStorage.getItem('userQuestions');
 const savedSubQuestions = localStorage.getItem('userSubQuestions');
@@ -8,9 +15,9 @@ class Export extends React.Component{
     render(){
         return  <section className="export">
                     <ul className="title">
-                        <li> CREATE </li>
-                        <li> PREVIEW </li>
-                        <li className="currentTitle"> EXPORT </li>
+                        <li> <Link to="/"> CREATE </Link></li>
+                        <li> <Link to="/preview"> PREVIEW </Link></li>
+                        <li className="currentTitle"> <Link to="/export"> EXPORT </Link></li>
                     </ul>
                     <div className="exportBox">
                         {savedQuestions}

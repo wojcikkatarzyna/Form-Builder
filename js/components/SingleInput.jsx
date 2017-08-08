@@ -44,8 +44,8 @@ class SingleInput extends React.Component{
     handleTypeChange = (e) => {
         e.preventDefault();
         questionsArray.push({
-            question: this.state.currentQuestion,
-            type: e.target.value,
+            question : this.state.currentQuestion,
+            type : e.target.value,
         });
         let question = JSON.stringify(questionsArray);
         localStorage.setItem("userQuestions", question);
