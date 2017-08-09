@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 import SingleInput from './SingleInput.jsx';
 
 class InputList extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
     remove = (arg) => {
         this.props.onRemove(arg);
     }

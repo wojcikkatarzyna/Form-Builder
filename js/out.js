@@ -12696,6 +12696,16 @@ var Create = function (_React$Component) {
             });
         };
 
+        _this.handleDeleteInput = function (index) {
+            console.log('usuwasz', index);
+            var inputList = _this.state.inputList;
+            inputList.splice(index, 1);
+            console.log(inputList);
+            _this.setState({
+                inputList: inputList
+            });
+        };
+
         _this.state = {
             inputList: [],
             counter: 0
@@ -12704,18 +12714,6 @@ var Create = function (_React$Component) {
     }
 
     _createClass(Create, [{
-        key: 'handleDeleteInput',
-        value: function handleDeleteInput(index) {
-            console.log('usuwasz', index);
-            console.log('this', this);
-            console.log('this.inputList:', this.state.inputList);
-            var inputList = this.state.inputList;
-            //inputList.splice(index, 1);
-            // this.setState({
-            //   inputList : inputList
-            // })
-        }
-    }, {
         key: 'render',
         value: function render() {
             if (this.state.counter === 0) {
@@ -13142,20 +13140,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var InputList = function (_React$Component) {
     _inherits(InputList, _React$Component);
 
-    function InputList() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function InputList(props) {
         _classCallCheck(this, InputList);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (InputList.__proto__ || Object.getPrototypeOf(InputList)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InputList.__proto__ || Object.getPrototypeOf(InputList)).call.apply(_ref, [this].concat(args))), _this), _this.remove = function (arg) {
+        _this.remove = function (arg) {
             _this.props.onRemove(arg);
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        return _this;
     }
 
     _createClass(InputList, [{
@@ -13218,10 +13212,18 @@ var SingleInput = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (SingleInput.__proto__ || Object.getPrototypeOf(SingleInput)).call(this, props));
 
+        _this.handleDeleteSubInput = function (index) {
+            console.log('usuwasz sub', index);
+            var subInputList = _this.state.subInputList;
+            subInputList.splice(index, 1);
+            console.log(subInputList);
+            _this.setState({
+                subInputList: subInputList
+            });
+        };
+
         _this.handleDeleteClick = function (e) {
             e.preventDefault();
-            console.log('klik delete');
-            console.log(_this.props.index);
             if (typeof _this.props.onRemove2 === 'function') {
                 _this.props.onRemove2(_this.props.index);
             }
@@ -13353,7 +13355,7 @@ var SingleInput = function (_React$Component) {
                         ' Delete '
                     ),
                     _react2.default.createElement('hr', null),
-                    _react2.default.createElement(_SubInputList2.default, { subInputList: this.state.subInputList })
+                    _react2.default.createElement(_SubInputList2.default, { subInputList: this.state.subInputList, onRemove: this.handleDeleteSubInput })
                 );
             }
         }
@@ -13444,6 +13446,13 @@ var SingleSubInput = function (_React$Component) {
             console.log(_this.state.currentAnswer, _this.state.currentQuestion, e.target.value);
             var subQuestions = JSON.stringify(subInputArray);
             localStorage.setItem("userSubQuestions", subQuestions);
+        };
+
+        _this.handleDeleteClick = function (e) {
+            e.preventDefault();
+            if (typeof _this.props.onRemove2 === 'function') {
+                _this.props.onRemove2(_this.props.index);
+            }
         };
 
         _this.state = {
@@ -13568,20 +13577,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SubInputList = function (_React$Component) {
     _inherits(SubInputList, _React$Component);
 
-    function SubInputList() {
+    function SubInputList(props) {
         _classCallCheck(this, SubInputList);
 
-        return _possibleConstructorReturn(this, (SubInputList.__proto__ || Object.getPrototypeOf(SubInputList)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (SubInputList.__proto__ || Object.getPrototypeOf(SubInputList)).call(this, props));
+
+        _this.remove = function (arg) {
+            _this.props.onRemove(arg);
+        };
+
+        return _this;
     }
 
     _createClass(SubInputList, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 'div',
                 null,
-                this.props.subInputList.map(function (input, index) {
-                    return _react2.default.createElement(_SingleSubInput2.default, { key: 'item-' + index, index: index });
+                this.props.subInputList.map(function (input, index, onRemove) {
+                    return _react2.default.createElement(_SingleSubInput2.default, { key: 'item-' + index, index: index, onRemove2: _this2.remove });
                 })
             );
         }

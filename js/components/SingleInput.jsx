@@ -17,10 +17,18 @@ class SingleInput extends React.Component{
         };
     }
 
+    handleDeleteSubInput = (index) => {
+        console.log('usuwasz sub',index);
+        let subInputList = this.state.subInputList;
+        subInputList.splice(index, 1);
+        console.log(subInputList);
+        this.setState({
+          subInputList : subInputList,
+        })
+    }
+
     handleDeleteClick = (e) => {
         e.preventDefault();
-        console.log('klik delete');
-        console.log(this.props.index);
         if ( typeof this.props.onRemove2 === 'function' ){
             this.props.onRemove2(this.props.index);
         }
@@ -85,7 +93,7 @@ class SingleInput extends React.Component{
                           <button className = "subInput" onClick={this.handleAddSubInputClick}> Add Sub-Input </button>
                           <button className = "delete" onClick={this.handleDeleteClick}> Delete </button>
                           <hr/>
-                          <SubInputList subInputList={this.state.subInputList}/>
+                          <SubInputList subInputList={this.state.subInputList} onRemove={this.handleDeleteSubInput}/>
                     </div>
         }
     }

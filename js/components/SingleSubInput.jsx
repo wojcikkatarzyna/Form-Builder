@@ -60,6 +60,13 @@ class SingleSubInput extends React.Component{
         localStorage.setItem("userSubQuestions", subQuestions);
     }
 
+    handleDeleteClick = (e) => {
+        e.preventDefault();
+        if ( typeof this.props.onRemove2 === 'function' ){
+            this.props.onRemove2(this.props.index);
+        }
+    }
+
     render(){
             return <div className = "singleSubInput">
                           Condition
