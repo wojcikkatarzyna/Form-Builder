@@ -7,5 +7,7 @@ Project is not completed.
 Main problem is about add more than one level of sub-inputs.
 
 To run project locally use commands:
+
 npm install
+
 ./node_modules/.bin/webpack-dev-server --inline --hot
