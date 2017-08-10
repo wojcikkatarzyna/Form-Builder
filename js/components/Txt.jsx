@@ -14,12 +14,8 @@ class Txt extends React.Component{
         this.setState({
             text : e.target.value,
         });
-        console.log(this.state.text);
         if ( typeof this.props.onText === 'function' ){
             this.props.onText(this.state.text);
-            console.log('funkcja ok, przekazuje props');
-        } else {
-            console.log('fincka not ok');
         }
     }
 
@@ -27,7 +23,7 @@ class Txt extends React.Component{
         return  <div>
                     <span> {this.props.question} </span>
                     <form>
-                        <input type="text" placeholder="insert text" onKeyUp={this.handleTextChange}/>
+                        <input type="text" placeholder="insert text" value={this.state.text} onChange={this.handleTextChange}/>
                     </form>
                 </div>
     }

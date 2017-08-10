@@ -18,7 +18,6 @@ class Radio extends React.Component{
             yesChecked : (e.currentTarget.value === "yes") ? true : false,
             noChecked : (e.currentTarget.value === "yes") ? false : true,
         })
-        console.log('after:', this.state.checked);
         if ( typeof this.props.onCheck === 'function' ){
             this.props.onCheck(this.state.checked);
         }

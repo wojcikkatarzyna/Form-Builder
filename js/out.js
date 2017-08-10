@@ -5691,9 +5691,9 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Number = __webpack_require__(254);
+var _Num = __webpack_require__(256);
 
-var _Number2 = _interopRequireDefault(_Number);
+var _Num2 = _interopRequireDefault(_Num);
 
 var _Radio = __webpack_require__(252);
 
@@ -5720,6 +5720,7 @@ var NumberForm = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (NumberForm.__proto__ || Object.getPrototypeOf(NumberForm)).call(this, props));
 
         _this.handleNumberCheck = function (num, numChanged) {
+            console.log(num, numChanged);
             _this.setState({
                 number: num,
                 changed: numChanged
@@ -5742,16 +5743,14 @@ var NumberForm = function (_React$Component) {
             var subQuestionArray = JSON.parse(savedSubQuestions);
 
             var subFormular = subQuestionArray.map(function (element) {
-                console.log('1etap');
                 if (element.index === _this2.props.index && _this2.state.changed) {
                     if (element.condition === "Equals" && element.answer === _this2.state.number || element.condition === "Greater than" && parseInt(element.answer) < parseInt(_this2.state.number) || element.condition === "Less than" && parseInt(element.answer) > parseInt(_this2.state.number)) {
-                        console.log(element.subType);
                         if (element.subType === 'yes / no') {
                             return _react2.default.createElement(_Radio2.default, { key: element.index, question: element.subQuestion });
                         } else if (element.subType === 'text') {
                             return _react2.default.createElement(_Txt2.default, { key: element.index, question: element.subQuestion });
                         } else {
-                            return _react2.default.createElement(_Number2.default, { key: element.index, question: element.subQuestion });
+                            return _react2.default.createElement(_Num2.default, { key: element.index, question: element.subQuestion });
                         }
                     } else {
                         return null;
@@ -5762,7 +5761,7 @@ var NumberForm = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_Number2.default, { question: this.props.question, onNumber: this.handleNumberCheck }),
+                _react2.default.createElement(_Num2.default, { question: this.props.question, onNumber: this.handleNumberCheck }),
                 _react2.default.createElement('br', null),
                 subFormular,
                 _react2.default.createElement('br', null)
@@ -5792,9 +5791,9 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _NumberForm = __webpack_require__(47);
+var _Num = __webpack_require__(256);
 
-var _NumberForm2 = _interopRequireDefault(_NumberForm);
+var _Num2 = _interopRequireDefault(_Num);
 
 var _Radio = __webpack_require__(252);
 
@@ -5849,7 +5848,7 @@ var RadioForm = function (_React$Component) {
                         return _react2.default.createElement(
                             'div',
                             { key: element.index },
-                            _react2.default.createElement(_NumberForm2.default, { question: element.subQuestion })
+                            _react2.default.createElement(_Num2.default, { question: element.subQuestion })
                         );
                     } else {
                         return _react2.default.createElement(_Txt2.default, { key: element.index, question: element.subQuestion });
@@ -5892,9 +5891,9 @@ var _reactDom = __webpack_require__(12);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Number = __webpack_require__(254);
+var _Num = __webpack_require__(256);
 
-var _Number2 = _interopRequireDefault(_Number);
+var _Num2 = _interopRequireDefault(_Num);
 
 var _Radio = __webpack_require__(252);
 
@@ -5948,7 +5947,7 @@ var TextForm = function (_React$Component) {
                         return _react2.default.createElement(
                             'div',
                             { key: element.index },
-                            _react2.default.createElement(_Number2.default, { question: element.subQuestion })
+                            _react2.default.createElement(_Num2.default, { question: element.subQuestion })
                         );
                     } else {
                         return _react2.default.createElement(_Txt2.default, { key: element.index, question: element.subQuestion });
@@ -14143,10 +14142,8 @@ var Create = function (_React$Component) {
         };
 
         _this.handleDeleteInput = function (index) {
-            console.log('usuwasz', index);
             var inputList = _this.state.inputList;
             inputList.splice(index, 1);
-            console.log(inputList);
             _this.setState({
                 inputList: inputList
             });
@@ -28602,7 +28599,6 @@ var Radio = function (_React$Component) {
                 yesChecked: e.currentTarget.value === "yes" ? true : false,
                 noChecked: e.currentTarget.value === "yes" ? false : true
             });
-            console.log('after:', _this.state.checked);
             if (typeof _this.props.onCheck === 'function') {
                 _this.props.onCheck(_this.state.checked);
             }
@@ -28648,84 +28644,7 @@ module.exports = Radio;
 
 /***/ }),
 /* 253 */,
-/* 254 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(12);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Num = function (_React$Component) {
-    _inherits(Num, _React$Component);
-
-    function Num(props) {
-        _classCallCheck(this, Num);
-
-        var _this = _possibleConstructorReturn(this, (Num.__proto__ || Object.getPrototypeOf(Num)).call(this, props));
-
-        _this.handleNumberChange = function (e) {
-            e.preventDefault();
-            _this.setState({
-                number: e.target.value,
-                changed: true
-            });
-            if (typeof _this.props.onNumber === 'function') {
-                _this.props.onNumber(_this.state.number, _this.state.changed);
-            }
-        };
-
-        _this.state = {
-            number: 0,
-            changed: false
-        };
-        return _this;
-    }
-
-    _createClass(Num, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'span',
-                    null,
-                    ' ',
-                    this.props.question,
-                    ' '
-                ),
-                _react2.default.createElement(
-                    'form',
-                    null,
-                    _react2.default.createElement('input', { type: 'number', placeholder: 'insert number', onChange: this.handleNumberChange })
-                )
-            );
-        }
-    }]);
-
-    return Num;
-}(_react2.default.Component);
-
-module.exports = Num;
-
-/***/ }),
+/* 254 */,
 /* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28763,12 +28682,8 @@ var Txt = function (_React$Component) {
             _this.setState({
                 text: e.target.value
             });
-            console.log(_this.state.text);
             if (typeof _this.props.onText === 'function') {
                 _this.props.onText(_this.state.text);
-                console.log('funkcja ok, przekazuje props');
-            } else {
-                console.log('fincka not ok');
             }
         };
 
@@ -28794,7 +28709,7 @@ var Txt = function (_React$Component) {
                 _react2.default.createElement(
                     'form',
                     null,
-                    _react2.default.createElement('input', { type: 'text', placeholder: 'insert text', onKeyUp: this.handleTextChange })
+                    _react2.default.createElement('input', { type: 'text', placeholder: 'insert text', value: this.state.text, onChange: this.handleTextChange })
                 )
             );
         }
@@ -28804,6 +28719,91 @@ var Txt = function (_React$Component) {
 }(_react2.default.Component);
 
 module.exports = Txt;
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(12);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Num = function (_React$Component) {
+    _inherits(Num, _React$Component);
+
+    function Num(props) {
+        _classCallCheck(this, Num);
+
+        var _this = _possibleConstructorReturn(this, (Num.__proto__ || Object.getPrototypeOf(Num)).call(this, props));
+
+        _this.updateState = function () {
+            if (typeof _this.props.onNumber === 'function') {
+                _this.props.onNumber(_this.state.number, _this.state.changed);
+            }
+        };
+
+        _this.handleNumberChange = function (e) {
+            e.preventDefault();
+            var newNumber = e.target.value;
+            _this.setState({
+                number: newNumber,
+                changed: true
+            });
+            if (typeof _this.props.onNumber === 'function') {
+                _this.props.onNumber(e.target.value, true);
+            }
+        };
+
+        _this.state = {
+            number: 0,
+            changed: false
+        };
+        return _this;
+    }
+
+    _createClass(Num, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'span',
+                    null,
+                    ' ',
+                    this.props.question,
+                    ' '
+                ),
+                _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement('input', { type: 'number', placeholder: 'insert number', value: this.state.number, onChange: this.handleNumberChange })
+                )
+            );
+        }
+    }]);
+
+    return Num;
+}(_react2.default.Component);
+
+module.exports = Num;
 
 /***/ })
 /******/ ]);

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Num from './Number.jsx';
+import Num from './Num.jsx';
 import Radio from './Radio.jsx';
 import Txt from './Txt.jsx';
 

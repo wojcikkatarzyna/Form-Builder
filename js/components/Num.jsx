@@ -10,22 +10,31 @@ class Num extends React.Component{
         };
     }
 
-    handleNumberChange = (e) => {
-        e.preventDefault();
-        this.setState({
-            number : e.target.value,
-            changed : true,
-        });
+    updateState = () => {
         if ( typeof this.props.onNumber === 'function' ){
             this.props.onNumber(this.state.number, this.state.changed);
         }
     }
 
+    handleNumberChange = (e) => {
+        e.preventDefault();
+        const newNumber = e.target.value;
+        this.setState({
+            number : newNumber,
+            changed : true,
+        });
+        if ( typeof this.props.onNumber === 'function' ){
+            this.props.onNumber(e.target.value, true);
+        }
+    }
+
+
+
     render(){
         return  <div>
                     <span> {this.props.question} </span>
                     <form>
-                        <input type="number" placeholder="insert number" onChange={this.handleNumberChange}/>
+                        <input type="number" placeholder="insert number" value={this.state.number} onChange={this.handleNumberChange}/>
                     </form>
                 </div>
     }

@@ -28,10 +28,8 @@ class Create extends React.Component{
     }
 
     handleDeleteInput = (index) => {
-        console.log('usuwasz',index);
         let inputList = this.state.inputList;
         inputList.splice(index, 1);
-        console.log(inputList);
         this.setState({
           inputList : inputList,
         })
