@@ -5742,15 +5742,15 @@ var NumberForm = function (_React$Component) {
             var savedSubQuestions = localStorage.getItem('userSubQuestions');
             var subQuestionArray = JSON.parse(savedSubQuestions);
 
-            var subFormular = subQuestionArray.map(function (element) {
+            var subFormular = subQuestionArray.map(function (element, index) {
                 if (element.index === _this2.props.index && _this2.state.changed) {
                     if (element.condition === "Equals" && element.answer === _this2.state.number || element.condition === "Greater than" && parseInt(element.answer) < parseInt(_this2.state.number) || element.condition === "Less than" && parseInt(element.answer) > parseInt(_this2.state.number)) {
                         if (element.subType === 'yes / no') {
-                            return _react2.default.createElement(_Radio2.default, { key: element.index, question: element.subQuestion });
+                            return _react2.default.createElement(_Radio2.default, { key: element.index + '-' + index, question: element.subQuestion });
                         } else if (element.subType === 'text') {
-                            return _react2.default.createElement(_Txt2.default, { key: element.index, question: element.subQuestion });
+                            return _react2.default.createElement(_Txt2.default, { key: element.index + '-' + index, question: element.subQuestion });
                         } else {
-                            return _react2.default.createElement(_Num2.default, { key: element.index, question: element.subQuestion });
+                            return _react2.default.createElement(_Num2.default, { key: element.index + '-' + index, question: element.subQuestion });
                         }
                     } else {
                         return null;
@@ -5839,19 +5839,14 @@ var RadioForm = function (_React$Component) {
             var savedSubQuestions = localStorage.getItem('userSubQuestions');
             var subQuestionArray = JSON.parse(savedSubQuestions);
 
-            var subFormular = subQuestionArray.map(function (element) {
-                console.log('1etap');
+            var subFormular = subQuestionArray.map(function (element, index) {
                 if (element.index === _this2.props.index && element.condition === "Equals" && element.answer === _this2.state.checked) {
                     if (element.subType === 'yes / no') {
-                        return _react2.default.createElement(_Radio2.default, { key: element.index, question: element.subQuestion });
+                        return _react2.default.createElement(_Radio2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     } else if (element.subType === 'number') {
-                        return _react2.default.createElement(
-                            'div',
-                            { key: element.index },
-                            _react2.default.createElement(_Num2.default, { question: element.subQuestion })
-                        );
+                        return _react2.default.createElement(_Num2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     } else {
-                        return _react2.default.createElement(_Txt2.default, { key: element.index, question: element.subQuestion });
+                        return _react2.default.createElement(_Txt2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     }
                 } else {
                     return null;
@@ -5939,18 +5934,14 @@ var TextForm = function (_React$Component) {
             var savedSubQuestions = localStorage.getItem('userSubQuestions');
             var subQuestionArray = JSON.parse(savedSubQuestions);
 
-            var subFormular = subQuestionArray.map(function (element) {
+            var subFormular = subQuestionArray.map(function (element, index) {
                 if (element.index === _this2.props.index && element.condition === "Equals" && element.answer === _this2.state.text) {
                     if (element.subType === 'yes / no') {
-                        return _react2.default.createElement(_Radio2.default, { key: element.index, question: element.subQuestion });
+                        return _react2.default.createElement(_Radio2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     } else if (element.subType === 'number') {
-                        return _react2.default.createElement(
-                            'div',
-                            { key: element.index },
-                            _react2.default.createElement(_Num2.default, { question: element.subQuestion })
-                        );
+                        return _react2.default.createElement(_Num2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     } else {
-                        return _react2.default.createElement(_Txt2.default, { key: element.index, question: element.subQuestion });
+                        return _react2.default.createElement(_Txt2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     }
                 } else {
                     return null;
@@ -14961,7 +14952,7 @@ var SubInputList = function (_React$Component) {
                 'div',
                 null,
                 this.props.subInputList.map(function (input, index, onRemove) {
-                    return _react2.default.createElement(_SingleSubInput2.default, { key: 'item-' + index, index: index, onRemove2: _this2.remove });
+                    return _react2.default.createElement(_SingleSubInput2.default, { key: 'subitem-' + index, index: index, onRemove2: _this2.remove });
                 })
             );
         }

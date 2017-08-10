@@ -26,17 +26,17 @@ class NumberForm extends React.Component{
         const savedSubQuestions = localStorage.getItem('userSubQuestions');
         const subQuestionArray = JSON.parse(savedSubQuestions);
 
-        const subFormular = subQuestionArray.map( (element) => {
+        const subFormular = subQuestionArray.map( (element, index) => {
             if ((element.index === this.props.index) && (this.state.changed)){
                 if  (((element.condition === "Equals") && (element.answer === this.state.number)) ||
                     ((element.condition === "Greater than") && (parseInt(element.answer) < parseInt(this.state.number))) ||
                     ((element.condition === "Less than") && (parseInt(element.answer) > parseInt(this.state.number)))) {
                       if (element.subType === 'yes / no') {
-                          return  <Radio key ={element.index} question={element.subQuestion}/>
+                          return  <Radio key={`${element.index}-${index}`} question={element.subQuestion}/>
                       } else if (element.subType === 'text') {
-                          return <Txt key ={element.index} question={element.subQuestion}/>
+                          return <Txt key={`${element.index}-${index}`} question={element.subQuestion}/>
                       } else {
-                        return  <Num key ={element.index} question={element.subQuestion}/>
+                        return  <Num key={`${element.index}-${index}`} question={element.subQuestion}/>
                       }
                 } else {
                     return  null;

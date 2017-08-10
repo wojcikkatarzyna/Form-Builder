@@ -24,16 +24,14 @@ class TextForm extends React.Component{
         const savedSubQuestions = localStorage.getItem('userSubQuestions');
         const subQuestionArray = JSON.parse(savedSubQuestions);
 
-        const subFormular = subQuestionArray.map( (element) => {
+        const subFormular = subQuestionArray.map( (element, index) => {
             if ((element.index === this.props.index) && (element.condition === "Equals") && (element.answer === this.state.text)) {
                 if (element.subType === 'yes / no') {
-                    return  <Radio key ={element.index} question={element.subQuestion}/>
+                    return  <Radio key={`${element.index}-${index}`} question={element.subQuestion}/>
                 } else if (element.subType === 'number') {
-                    return  <div key={element.index}>
-                                <Num  question={element.subQuestion} />
-                            </div>
+                    return  <Num key={`${element.index}-${index}`} question={element.subQuestion} />
                 } else {
-                    return  <Txt key ={element.index} question={element.subQuestion}/>
+                    return  <Txt key={`${element.index}-${index}`} question={element.subQuestion}/>
                 }
             } else {
                 return  null;

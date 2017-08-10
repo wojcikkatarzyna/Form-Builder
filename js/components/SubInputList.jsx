@@ -11,11 +11,11 @@ class SubInputList extends React.Component{
     remove = (arg) => {
         this.props.onRemove(arg);
     }
-    
+
     render(){
         return  <div>
                     {this.props.subInputList.map((input, index, onRemove) =>
-                        <SingleSubInput key={`item-${index}`} index={index} onRemove2={this.remove}/>)}
+                        <SingleSubInput key={`subitem-${index}`} index={index} onRemove2={this.remove}/>)}
                 </div>
     }
 }
