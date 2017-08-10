@@ -1,26 +1,7 @@
 *{
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-}
-
-header{
-    font-size: 35px;
-    font-weight: bold;
-    background-color: grey;
-    text-align: center;
-    width: 600px;
-    margin: 0 25px;
-}
-
-main{
-    padding: 25px 0;
-    width: 600px;
-    margin: 0 25px;
-}
-
-section{
-    padding: 25px 0;
+    padding: 5px;
 }
 
 .singleInput{
@@ -29,13 +10,18 @@ section{
 
 .singleSubInput{
     padding: 5px 0;
-    margin-left: 25px;
+    margin-left: 50px;
 }
 
 .title{
     font-size: 25px;
     border-bottom: 2px solid black;
     margin-bottom: 15px;
+    padding: 0;
+}
+
+hr{
+    padding: 0;
 }
 
 li{
@@ -52,15 +38,6 @@ li{
 }
 
 .exportBox{
-    width: 500px;
-    margin: 15px auto;
+    margin: auto;
     border: 1px solid black;
-}
-
-footer{
-    font-size: 15px;
-    background-color: grey;
-    text-align: center;
-    width: 600px;
-    margin: 0 25px;
 }

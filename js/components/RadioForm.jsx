@@ -1,60 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import TextForm from './TextForm.jsx';
-import NumberForm from './NumberForm.jsx';
+import Num from './NumberForm.jsx';
+import Radio from './Radio.jsx';
+import Txt from './Txt.jsx';
 
 class RadioForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             checked : '',
-            yesChecked : false,
-            noChecked : false,
         };
     }
 
-    handleYesChecked = (e) => {
-        e.preventDefault();
+    handleCheckedCheck = (check) => {
         this.setState({
-            checked : 'yes',
-            yesChecked : true,
-            noChecked : false,
+            checked : check,
         })
-    };
-
-    handleNoChecked = (e) => {
-        e.preventDefault();
-        this.setState({
-            checked : 'no',
-            yesChecked : false,
-            noChecked : true,
-        })
-    };
-
+    }
 
     render(){
         const savedSubQuestions = localStorage.getItem('userSubQuestions');
         const subQuestionArray = JSON.parse(savedSubQuestions);
 
         const subFormular = subQuestionArray.map( (element) => {
+            console.log('1etap');
             if ((element.index === this.props.index) && (element.condition === "Equals") && (element.answer === this.state.checked)) {
-                if (element.subType === 'yesno') {
-                    return  <div key={element.index}>
-                                {element.subQuestion}
-                                <form>
-                                    <input type="radio" name="yes" value="yes" checked={this.state.yesChecked} onChange={this.handleYesChecked}/> YES
-                                    <input type="radio" name="no" value="no" checked={this.state.noChecked} onChange={this.handleNoChecked}/> NO
-                                </form>
-                            </div>
+                if (element.subType === 'yes / no') {
+                    return  <Radio key ={element.index} question={element.subQuestion}/>
                 } else if (element.subType === 'number') {
                     return  <div key={element.index}>
-                                <NumberForm  question={element.subQuestion} />
+                                <Num  question={element.subQuestion} />
                             </div>
                 } else {
-                    return  <div key={element.index}>
-                                <TextForm question={element.subQuestion} />
-                            </div>
+                    return  <Txt key ={element.index} question={element.subQuestion}/>
                 }
             } else {
                 return  null;
@@ -62,11 +41,7 @@ class RadioForm extends React.Component{
         })
 
         return  <div>
-                    <span> {this.props.question} </span>
-                    <form>
-                        <input type="radio" name="yes" value="yes" checked={this.state.yesChecked} onChange={this.handleYesChecked}/> YES
-                        <input type="radio" name="no" value="no" checked={this.state.noChecked} onChange={this.handleNoChecked}/> NO
-                    </form>
+                    <Radio question={this.props.question} onCheck={this.handleCheckedCheck}/>
                     <br/>
                     {subFormular}
                     <br/>

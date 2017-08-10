@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import RadioForm from './RadioForm.jsx';
-import TextForm from './TextForm.jsx';
+import Num from './Number.jsx';
+import Radio from './Radio.jsx';
+import Txt from './Txt.jsx';
 
 class NumberForm extends React.Component{
     constructor(props){
@@ -13,12 +14,11 @@ class NumberForm extends React.Component{
         };
     }
 
-    handleNumberChange = (e) => {
-        e.preventDefault();
+    handleNumberCheck = (num, numChanged) => {
         this.setState({
-            number : e.target.value,
-            changed : true,
-        });
+            number : num,
+            changed : numChanged,
+        })
     }
 
     render(){
@@ -26,28 +26,18 @@ class NumberForm extends React.Component{
         const subQuestionArray = JSON.parse(savedSubQuestions);
 
         const subFormular = subQuestionArray.map( (element) => {
+            console.log('1etap');
             if ((element.index === this.props.index) && (this.state.changed)){
                 if  (((element.condition === "Equals") && (element.answer === this.state.number)) ||
                     ((element.condition === "Greater than") && (parseInt(element.answer) < parseInt(this.state.number))) ||
                     ((element.condition === "Less than") && (parseInt(element.answer) > parseInt(this.state.number)))) {
                       console.log(element.subType);
-                      if (element.subType === 'yesno') {
-                          return  <div key={element.index}>
-                                      <RadioForm question={element.subQuestion} />
-                                  </div>
+                      if (element.subType === 'yes / no') {
+                          return  <Radio key ={element.index} question={element.subQuestion}/>
                       } else if (element.subType === 'text') {
-                          return <div> Halo </div>
-                        // return   <div key={element.index}>
-                        //              <TextForm question={element.subQuestion} />
-                        //          </div>
+                          return <Txt key ={element.index} question={element.subQuestion}/>
                       } else {
-                        return  <div key={element.index}>
-                                    <span> {element.subQuestion} </span>
-                                    <form>
-                                        <input type="number" placeholder="insert number"/>
-                                    </form>
-                                    <br/>
-                                </div>
+                        return  <Num key ={element.index} question={element.subQuestion}/>
                       }
                 } else {
                     return  null;
@@ -56,12 +46,9 @@ class NumberForm extends React.Component{
         })
 
         return  <div>
-                    <span> {this.props.question} </span>
-                    <form>
-                        <input type="number" placeholder="insert number" onChange={this.handleNumberChange}/>
-                    </form>
+                    <Num question={this.props.question} onNumber={this.handleNumberCheck}/>
                     <br/>
-                    //{subFormular}
+                    {subFormular}
                     <br/>
                 </div>
     }
