@@ -28600,7 +28600,7 @@ var Radio = function (_React$Component) {
                 noChecked: e.currentTarget.value === "yes" ? false : true
             });
             if (typeof _this.props.onCheck === 'function') {
-                _this.props.onCheck(_this.state.checked);
+                _this.props.onCheck(e.currentTarget.value);
             }
         };
 
@@ -28683,7 +28683,7 @@ var Txt = function (_React$Component) {
                 text: e.target.value
             });
             if (typeof _this.props.onText === 'function') {
-                _this.props.onText(_this.state.text);
+                _this.props.onText(e.target.value);
             }
         };
 

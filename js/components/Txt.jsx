@@ -15,7 +15,7 @@ class Txt extends React.Component{
             text : e.target.value,
         });
         if ( typeof this.props.onText === 'function' ){
-            this.props.onText(this.state.text);
+            this.props.onText(e.target.value);
         }
     }
 
