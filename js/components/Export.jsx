@@ -8,18 +8,39 @@ import { Router,
     hashHistory
 } from 'react-router';
 
-const savedQuestions = localStorage.getItem('userQuestions');
-
 class Export extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            data : localStorage.getItem('userQuestions'),
+        }
+    }
+
+    handleClearLocalStorage = () => {
+        localStorage.clear();
+    }
+
+    componentDidMount() {
+        this.intervalId = setInterval(() => {
+            this.setState({
+                data : localStorage.getItem('userQuestions'),
+            });
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
+    }
+
     render(){
         return  <section className="export">
                     <ul className="title">
-                        <li> <Link to="/"> CREATE </Link></li>
+                        <li> <Link onClick={this.handleClearLocalStorage} to="/"> CREATE </Link></li>
                         <li> <Link to="/preview"> PREVIEW </Link></li>
                         <li className="currentTitle"> <Link to="/export"> EXPORT </Link></li>
                     </ul>
                     <div className="exportBox">
-                        {savedQuestions}
+                        {this.state.data}
                     </div>
                 </section>
     }

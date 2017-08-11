@@ -14278,18 +14278,41 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var savedQuestions = localStorage.getItem('userQuestions');
-
 var Export = function (_React$Component) {
     _inherits(Export, _React$Component);
 
-    function Export() {
+    function Export(props) {
         _classCallCheck(this, Export);
 
-        return _possibleConstructorReturn(this, (Export.__proto__ || Object.getPrototypeOf(Export)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Export.__proto__ || Object.getPrototypeOf(Export)).call(this, props));
+
+        _this.handleClearLocalStorage = function () {
+            localStorage.clear();
+        };
+
+        _this.state = {
+            data: localStorage.getItem('userQuestions')
+        };
+        return _this;
     }
 
     _createClass(Export, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.intervalId = setInterval(function () {
+                _this2.setState({
+                    data: localStorage.getItem('userQuestions')
+                });
+            }, 1000);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            clearInterval(this.intervalId);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -14304,7 +14327,7 @@ var Export = function (_React$Component) {
                         ' ',
                         _react2.default.createElement(
                             _reactRouter.Link,
-                            { to: '/' },
+                            { onClick: this.handleClearLocalStorage, to: '/' },
                             ' CREATE '
                         )
                     ),
@@ -14332,7 +14355,7 @@ var Export = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'exportBox' },
-                    savedQuestions
+                    this.state.data
                 )
             );
         }
