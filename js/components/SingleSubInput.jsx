@@ -10,17 +10,18 @@ class SingleSubInput extends React.Component{
             subInputList : [],
             counter : 0,
             index : this.props.index,
+            num : this.props.num,
         };
     }
 
-    handleAddSubInputClick = (e) => {
-        e.preventDefault();
-        console.log('dodano');
-        this.setState({
-            counter : this.state.counter + 1,
-            subInputList : this.state.subInputList.concat([this.state.counter]),
-        })
-    }
+    // handleAddSubInputClick = (e) => {
+    //     e.preventDefault();
+    //     console.log('dodano');
+    //     this.setState({
+    //         counter : this.state.counter + 1,
+    //         subInputList : this.state.subInputList.concat([this.state.counter]),
+    //     })
+    // }
 
     handleConditionChange = (e) => {
         e.preventDefault();
@@ -55,9 +56,10 @@ class SingleSubInput extends React.Component{
             subQuestion : this.state.currentQuestion,
             subType : e.target.value,
         });
-        console.log(this.state.currentAnswer, this.state.currentQuestion, e.target.value);
-        let subQuestions = JSON.stringify(subInputArray);
-        localStorage.setItem("userSubQuestions", subQuestions);
+        const question = JSON.parse(localStorage.userQuestions);
+        const questionIndex = this.state.num;
+        question[this.state.num].subInput = subInputArray;
+        localStorage.setItem("userQuestions", JSON.stringify(question));
     }
 
     handleDeleteClick = (e) => {

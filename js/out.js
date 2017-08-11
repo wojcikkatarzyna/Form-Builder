@@ -5739,11 +5739,12 @@ var NumberForm = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var savedSubQuestions = localStorage.getItem('userSubQuestions');
-            var subQuestionArray = JSON.parse(savedSubQuestions);
+            var savedQuestions = localStorage.getItem('userQuestions');
+            var questionArray = JSON.parse(savedQuestions);
+            var question = questionArray[this.props.index];
 
-            var subFormular = subQuestionArray.map(function (element, index) {
-                if (element.index === _this2.props.index && _this2.state.changed) {
+            var subFormular = question.subInput.map(function (element, index) {
+                if (_this2.state.changed) {
                     if (element.condition === "Equals" && element.answer === _this2.state.number || element.condition === "Greater than" && parseInt(element.answer) < parseInt(_this2.state.number) || element.condition === "Less than" && parseInt(element.answer) > parseInt(_this2.state.number)) {
                         if (element.subType === 'yes / no') {
                             return _react2.default.createElement(_Radio2.default, { key: element.index + '-' + index, question: element.subQuestion });
@@ -5836,11 +5837,12 @@ var RadioForm = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var savedSubQuestions = localStorage.getItem('userSubQuestions');
-            var subQuestionArray = JSON.parse(savedSubQuestions);
+            var savedQuestions = localStorage.getItem('userQuestions');
+            var questionArray = JSON.parse(savedQuestions);
+            var question = questionArray[this.props.index];
 
-            var subFormular = subQuestionArray.map(function (element, index) {
-                if (element.index === _this2.props.index && element.condition === "Equals" && element.answer === _this2.state.checked) {
+            var subFormular = question.subInput.map(function (element, index) {
+                if (element.condition === "Equals" && element.answer === _this2.state.checked) {
                     if (element.subType === 'yes / no') {
                         return _react2.default.createElement(_Radio2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     } else if (element.subType === 'number') {
@@ -5931,11 +5933,12 @@ var TextForm = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var savedSubQuestions = localStorage.getItem('userSubQuestions');
-            var subQuestionArray = JSON.parse(savedSubQuestions);
+            var savedQuestions = localStorage.getItem('userQuestions');
+            var questionArray = JSON.parse(savedQuestions);
+            var question = questionArray[this.props.index];
 
-            var subFormular = subQuestionArray.map(function (element, index) {
-                if (element.index === _this2.props.index && element.condition === "Equals" && element.answer === _this2.state.text) {
+            var subFormular = question.subInput.map(function (element, index) {
+                if (element.condition === "Equals" && element.answer === _this2.state.text) {
                     if (element.subType === 'yes / no') {
                         return _react2.default.createElement(_Radio2.default, { key: element.index + '-' + index, question: element.subQuestion });
                     } else if (element.subType === 'number') {
@@ -14276,7 +14279,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var savedQuestions = localStorage.getItem('userQuestions');
-var savedSubQuestions = localStorage.getItem('userSubQuestions');
 
 var Export = function (_React$Component) {
     _inherits(Export, _React$Component);
@@ -14330,8 +14332,7 @@ var Export = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'exportBox' },
-                    savedQuestions,
-                    savedSubQuestions
+                    savedQuestions
                 )
             );
         }
@@ -14515,7 +14516,7 @@ var InputList = function (_React$Component) {
                 'div',
                 null,
                 this.props.inputList.map(function (input, index, onRemove) {
-                    return _react2.default.createElement(_SingleInput2.default, { key: 'item-' + index, index: index, onRemove2: _this2.remove });
+                    return _react2.default.createElement(_SingleInput2.default, { key: 'item-' + index, index: index, num: index, onRemove2: _this2.remove });
                 })
             );
         }
@@ -14602,7 +14603,8 @@ var SingleInput = function (_React$Component) {
             e.preventDefault();
             questionsArray.push({
                 question: _this.state.currentQuestion,
-                type: e.target.value
+                type: e.target.value,
+                subInput: []
             });
             var question = JSON.stringify(questionsArray);
             localStorage.setItem("userQuestions", question);
@@ -14612,7 +14614,8 @@ var SingleInput = function (_React$Component) {
             subInputList: [],
             counter: 0,
             questionList: [],
-            typeList: []
+            typeList: [],
+            num: _this.props.num
         };
         return _this;
     }
@@ -14709,7 +14712,7 @@ var SingleInput = function (_React$Component) {
                         ' Delete '
                     ),
                     _react2.default.createElement('hr', null),
-                    _react2.default.createElement(_SubInputList2.default, { subInputList: this.state.subInputList, onRemove: this.handleDeleteSubInput })
+                    _react2.default.createElement(_SubInputList2.default, { subInputList: this.state.subInputList, num: this.state.num, onRemove: this.handleDeleteSubInput })
                 );
             }
         }
@@ -14755,15 +14758,6 @@ var SingleSubInput = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (SingleSubInput.__proto__ || Object.getPrototypeOf(SingleSubInput)).call(this, props));
 
-        _this.handleAddSubInputClick = function (e) {
-            e.preventDefault();
-            console.log('dodano');
-            _this.setState({
-                counter: _this.state.counter + 1,
-                subInputList: _this.state.subInputList.concat([_this.state.counter])
-            });
-        };
-
         _this.handleConditionChange = function (e) {
             e.preventDefault();
             _this.setState({
@@ -14797,9 +14791,10 @@ var SingleSubInput = function (_React$Component) {
                 subQuestion: _this.state.currentQuestion,
                 subType: e.target.value
             });
-            console.log(_this.state.currentAnswer, _this.state.currentQuestion, e.target.value);
-            var subQuestions = JSON.stringify(subInputArray);
-            localStorage.setItem("userSubQuestions", subQuestions);
+            var question = JSON.parse(localStorage.userQuestions);
+            var questionIndex = _this.state.num;
+            question[_this.state.num].subInput = subInputArray;
+            localStorage.setItem("userQuestions", JSON.stringify(question));
         };
 
         _this.handleDeleteClick = function (e) {
@@ -14812,10 +14807,20 @@ var SingleSubInput = function (_React$Component) {
         _this.state = {
             subInputList: [],
             counter: 0,
-            index: _this.props.index
+            index: _this.props.index,
+            num: _this.props.num
         };
         return _this;
     }
+
+    // handleAddSubInputClick = (e) => {
+    //     e.preventDefault();
+    //     console.log('dodano');
+    //     this.setState({
+    //         counter : this.state.counter + 1,
+    //         subInputList : this.state.subInputList.concat([this.state.counter]),
+    //     })
+    // }
 
     _createClass(SingleSubInput, [{
         key: 'render',
@@ -14940,6 +14945,9 @@ var SubInputList = function (_React$Component) {
             _this.props.onRemove(arg);
         };
 
+        _this.state = {
+            num: _this.props.num
+        };
         return _this;
     }
 
@@ -14951,8 +14959,8 @@ var SubInputList = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                this.props.subInputList.map(function (input, index, onRemove) {
-                    return _react2.default.createElement(_SingleSubInput2.default, { key: 'subitem-' + index, index: index, onRemove2: _this2.remove });
+                this.props.subInputList.map(function (input, index, num, onRemove) {
+                    return _react2.default.createElement(_SingleSubInput2.default, { key: 'subitem-' + index, index: index, num: _this2.state.num, onRemove2: _this2.remove });
                 })
             );
         }

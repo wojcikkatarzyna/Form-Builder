@@ -23,11 +23,12 @@ class NumberForm extends React.Component{
     }
 
     render(){
-        const savedSubQuestions = localStorage.getItem('userSubQuestions');
-        const subQuestionArray = JSON.parse(savedSubQuestions);
+        const savedQuestions = localStorage.getItem('userQuestions');
+        const questionArray = JSON.parse(savedQuestions);
+        const question = questionArray[this.props.index];
 
-        const subFormular = subQuestionArray.map( (element, index) => {
-            if ((element.index === this.props.index) && (this.state.changed)){
+        const subFormular = question.subInput.map( (element, index) => {
+            if (this.state.changed) {
                 if  (((element.condition === "Equals") && (element.answer === this.state.number)) ||
                     ((element.condition === "Greater than") && (parseInt(element.answer) < parseInt(this.state.number))) ||
                     ((element.condition === "Less than") && (parseInt(element.answer) > parseInt(this.state.number)))) {

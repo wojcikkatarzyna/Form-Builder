@@ -9,7 +9,6 @@ import { Router,
 } from 'react-router';
 
 const savedQuestions = localStorage.getItem('userQuestions');
-const savedSubQuestions = localStorage.getItem('userSubQuestions');
 
 class Export extends React.Component{
     render(){
@@ -21,7 +20,6 @@ class Export extends React.Component{
                     </ul>
                     <div className="exportBox">
                         {savedQuestions}
-                        {savedSubQuestions}
                     </div>
                 </section>
     }

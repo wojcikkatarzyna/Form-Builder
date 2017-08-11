@@ -15,7 +15,7 @@ class InputList extends React.Component{
     render(){
         return  <div>
                     {this.props.inputList.map((input, index, onRemove) =>
-                        <SingleInput key={`item-${index}`} index={index} onRemove2={this.remove}/>)}
+                        <SingleInput key={`item-${index}`} index={index} num={index} onRemove2={this.remove}/>)}
                 </div>
     }
 }

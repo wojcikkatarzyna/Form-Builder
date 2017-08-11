@@ -14,6 +14,7 @@ class SingleInput extends React.Component{
             counter : 0,
             questionList : [],
             typeList : [],
+            num : this.props.num,
         };
     }
 
@@ -54,6 +55,7 @@ class SingleInput extends React.Component{
         questionsArray.push({
             question : this.state.currentQuestion,
             type : e.target.value,
+            subInput : [],
         });
         let question = JSON.stringify(questionsArray);
         localStorage.setItem("userQuestions", question);
@@ -93,7 +95,7 @@ class SingleInput extends React.Component{
                           <button className = "subInput" onClick={this.handleAddSubInputClick}> Add Sub-Input </button>
                           <button className = "delete" onClick={this.handleDeleteClick}> Delete </button>
                           <hr/>
-                          <SubInputList subInputList={this.state.subInputList} onRemove={this.handleDeleteSubInput}/>
+                          <SubInputList subInputList={this.state.subInputList} num={this.state.num} onRemove={this.handleDeleteSubInput}/>
                     </div>
         }
     }
