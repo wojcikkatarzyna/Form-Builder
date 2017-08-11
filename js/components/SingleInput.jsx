@@ -19,10 +19,8 @@ class SingleInput extends React.Component{
     }
 
     handleDeleteSubInput = (index) => {
-        console.log('usuwasz sub',index);
         let subInputList = this.state.subInputList;
         subInputList.splice(index, 1);
-        console.log(subInputList);
         this.setState({
           subInputList : subInputList,
         })

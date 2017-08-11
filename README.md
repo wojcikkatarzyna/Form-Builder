@@ -10,4 +10,6 @@ To run project locally use commands:
 
 npm install
 
+./node_modules/.bin/webpack
+
 ./node_modules/.bin/webpack-dev-server --inline --hot

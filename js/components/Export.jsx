@@ -16,10 +16,6 @@ class Export extends React.Component{
         }
     }
 
-    handleClearLocalStorage = () => {
-        localStorage.clear();
-    }
-
     componentDidMount() {
         this.intervalId = setInterval(() => {
             this.setState({
@@ -33,16 +29,25 @@ class Export extends React.Component{
     }
 
     render(){
-        return  <section className="export">
-                    <ul className="title">
-                        <li> <Link onClick={this.handleClearLocalStorage} to="/"> CREATE </Link></li>
-                        <li> <Link to="/preview"> PREVIEW </Link></li>
-                        <li className="currentTitle"> <Link to="/export"> EXPORT </Link></li>
-                    </ul>
-                    <div className="exportBox">
-                        {this.state.data}
-                    </div>
-                </section>
+        if (window.localStorage.length > 0) {
+            return  <section className="export">
+                        <ul className="title">
+                            <li> <a href="http://localhost:8080"> CREATE </a> </li>
+                            <li> <Link to="/preview"> PREVIEW </Link></li>
+                            <li className="currentTitle"> <Link to="/export"> EXPORT </Link></li>
+                        </ul>
+                        <div className="exportBox">
+                            {this.state.data}
+                        </div>
+                    </section>
+        } else {
+            return <div>
+                      Please, complete Create section first
+                      <br/>
+                      <button> <Link to="/"> back to CREATE </Link> </button>
+                  </div>
+        }
+
     }
 }
 

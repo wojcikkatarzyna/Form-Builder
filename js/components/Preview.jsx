@@ -13,14 +13,24 @@ import TextForm from './TextForm.jsx';
 import NumberForm from './NumberForm.jsx';
 
 class Preview extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            data : localStorage.getItem('userQuestions'),
+        }
+    }
+
+    componentWillMount() {
+        let formular = [];
+    }
 
     render(){
 
           if (window.localStorage.length > 0) {
               const savedQuestions = localStorage.getItem('userQuestions');
-              const questionArray = JSON.parse(savedQuestions);
+              const questionArray = JSON.parse(this.state.data);
 
-              const formular = questionArray.map( (element, index) => {
+              let formular = questionArray.map( (element, index) => {
                   if (element.type === 'yes / no') {
                       return  <RadioForm key={index} index={index} question={element.question} />
                   } else if (element.type === 'number') {
@@ -32,14 +42,18 @@ class Preview extends React.Component{
 
               return  <section className="preview">
                           <ul className="title">
-                              <li> <Link to="/"> CREATE </Link></li>
+                              <li> <a href="http://localhost:8080"> CREATE </a> </li>
                               <li className="currentTitle"> <Link to="/preview"> PREVIEW </Link></li>
                               <li> <Link to="/export"> EXPORT </Link></li>
                           </ul>
                           {formular}
                       </section>
           } else {
-              return <div> Please, complete Create section first </div>
+              return <div>
+                        Please, complete Create section first
+                        <br/>
+                        <button> <Link to="/"> back to CREATE </Link> </button>
+                    </div>
           }
 
       }

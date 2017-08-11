@@ -8,6 +8,7 @@ class SubInputList extends React.Component{
         super(props);
         this.state = {
             num : this.props.num,
+            inputCounter : this.props.inputCounter,
         }
     }
 
@@ -17,7 +18,7 @@ class SubInputList extends React.Component{
 
     render(){
         return  <div>
-                    {this.props.subInputList.map((input, index, num, onRemove) =>
+                    {this.props.subInputList.map((input, index, onRemove) =>
                         <SingleSubInput key={`subitem-${index}`} index={index} num={this.state.num} onRemove2={this.remove}/>)}
                 </div>
     }

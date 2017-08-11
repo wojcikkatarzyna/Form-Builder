@@ -5720,7 +5720,6 @@ var NumberForm = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (NumberForm.__proto__ || Object.getPrototypeOf(NumberForm)).call(this, props));
 
         _this.handleNumberCheck = function (num, numChanged) {
-            console.log(num, numChanged);
             _this.setState({
                 number: num,
                 changed: numChanged
@@ -14151,6 +14150,11 @@ var Create = function (_React$Component) {
     }
 
     _createClass(Create, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            localStorage.clear();
+        }
+    }, {
         key: 'render',
         value: function render() {
             if (this.state.counter === 0) {
@@ -14286,10 +14290,6 @@ var Export = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Export.__proto__ || Object.getPrototypeOf(Export)).call(this, props));
 
-        _this.handleClearLocalStorage = function () {
-            localStorage.clear();
-        };
-
         _this.state = {
             data: localStorage.getItem('userQuestions')
         };
@@ -14315,49 +14315,70 @@ var Export = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
-                'section',
-                { className: 'export' },
-                _react2.default.createElement(
-                    'ul',
-                    { className: 'title' },
+            if (window.localStorage.length > 0) {
+                return _react2.default.createElement(
+                    'section',
+                    { className: 'export' },
                     _react2.default.createElement(
-                        'li',
-                        null,
-                        ' ',
+                        'ul',
+                        { className: 'title' },
                         _react2.default.createElement(
-                            _reactRouter.Link,
-                            { onClick: this.handleClearLocalStorage, to: '/' },
-                            ' CREATE '
+                            'li',
+                            null,
+                            ' ',
+                            _react2.default.createElement(
+                                'a',
+                                { href: 'http://localhost:8080' },
+                                ' CREATE '
+                            ),
+                            ' '
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            ' ',
+                            _react2.default.createElement(
+                                _reactRouter.Link,
+                                { to: '/preview' },
+                                ' PREVIEW '
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            { className: 'currentTitle' },
+                            ' ',
+                            _react2.default.createElement(
+                                _reactRouter.Link,
+                                { to: '/export' },
+                                ' EXPORT '
+                            )
                         )
                     ),
                     _react2.default.createElement(
-                        'li',
-                        null,
-                        ' ',
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { to: '/preview' },
-                            ' PREVIEW '
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        { className: 'currentTitle' },
-                        ' ',
-                        _react2.default.createElement(
-                            _reactRouter.Link,
-                            { to: '/export' },
-                            ' EXPORT '
-                        )
+                        'div',
+                        { className: 'exportBox' },
+                        this.state.data
                     )
-                ),
-                _react2.default.createElement(
+                );
+            } else {
+                return _react2.default.createElement(
                     'div',
-                    { className: 'exportBox' },
-                    this.state.data
-                )
-            );
+                    null,
+                    'Please, complete Create section first',
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        null,
+                        ' ',
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/' },
+                            ' back to CREATE '
+                        ),
+                        ' '
+                    )
+                );
+            }
         }
     }]);
 
@@ -14408,19 +14429,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Preview = function (_React$Component) {
     _inherits(Preview, _React$Component);
 
-    function Preview() {
+    function Preview(props) {
         _classCallCheck(this, Preview);
 
-        return _possibleConstructorReturn(this, (Preview.__proto__ || Object.getPrototypeOf(Preview)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Preview.__proto__ || Object.getPrototypeOf(Preview)).call(this, props));
+
+        _this.state = {
+            data: localStorage.getItem('userQuestions')
+        };
+        return _this;
     }
 
     _createClass(Preview, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var formular = [];
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             if (window.localStorage.length > 0) {
                 var savedQuestions = localStorage.getItem('userQuestions');
-                var questionArray = JSON.parse(savedQuestions);
+                var questionArray = JSON.parse(this.state.data);
 
                 var formular = questionArray.map(function (element, index) {
                     if (element.type === 'yes / no') {
@@ -14443,10 +14474,11 @@ var Preview = function (_React$Component) {
                             null,
                             ' ',
                             _react2.default.createElement(
-                                _reactRouter.Link,
-                                { to: '/' },
+                                'a',
+                                { href: 'http://localhost:8080' },
                                 ' CREATE '
-                            )
+                            ),
+                            ' '
                         ),
                         _react2.default.createElement(
                             'li',
@@ -14475,7 +14507,19 @@ var Preview = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    ' Please, complete Create section first '
+                    'Please, complete Create section first',
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        null,
+                        ' ',
+                        _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/' },
+                            ' back to CREATE '
+                        ),
+                        ' '
+                    )
                 );
             }
         }
@@ -14591,10 +14635,8 @@ var SingleInput = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (SingleInput.__proto__ || Object.getPrototypeOf(SingleInput)).call(this, props));
 
         _this.handleDeleteSubInput = function (index) {
-            console.log('usuwasz sub', index);
             var subInputList = _this.state.subInputList;
             subInputList.splice(index, 1);
-            console.log(subInputList);
             _this.setState({
                 subInputList: subInputList
             });
@@ -14969,7 +15011,8 @@ var SubInputList = function (_React$Component) {
         };
 
         _this.state = {
-            num: _this.props.num
+            num: _this.props.num,
+            inputCounter: _this.props.inputCounter
         };
         return _this;
     }
@@ -14982,7 +15025,7 @@ var SubInputList = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                this.props.subInputList.map(function (input, index, num, onRemove) {
+                this.props.subInputList.map(function (input, index, onRemove) {
                     return _react2.default.createElement(_SingleSubInput2.default, { key: 'subitem-' + index, index: index, num: _this2.state.num, onRemove2: _this2.remove });
                 })
             );

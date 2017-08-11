@@ -15,7 +15,6 @@ class NumberForm extends React.Component{
     }
 
     handleNumberCheck = (num, numChanged) => {
-        console.log(num, numChanged);
         this.setState({
             number : num,
             changed : numChanged,

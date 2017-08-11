@@ -19,6 +19,10 @@ class Create extends React.Component{
         };
     }
 
+    componentWillMount() {
+        localStorage.clear();
+    }
+
     handleAddInputClick = (e) => {
         e.preventDefault();
         this.setState({
